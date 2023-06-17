@@ -1,0 +1,12 @@
+<Entity >
+   
+	<MagicConvertMaterialComponent
+		radius = "8"
+		from_material_tag = "[impure]"
+		kill_when_finished="1"
+		steps_per_frame="1"
+		is_circle="1"
+		to_material = "blood"
+		>
+	</MagicConvertMaterialComponent>
+</Entity>

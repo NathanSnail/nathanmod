@@ -1,2 +1,4 @@
 nathanmod_action_projectile_gravity,Projectile Gravity,,,,,,,,,,,,,
 nathanmod_actiondesc_projectile_gravity,Attracts nearby projectiles to this one,,,,,,,,,,,,,
+nathanmod_action_bounce_evil,Bloody Bounce,,,,,,,,,,,,,
+nathanmod_actiondesc_bounce_evil,Makes a projectile able to hit you,,,,,,,,,,,,,
