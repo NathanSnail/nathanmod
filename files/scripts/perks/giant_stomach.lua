@@ -29,7 +29,6 @@ for k, c in ipairs(cs) do
 				EntityRemoveComponent(giant_stomach_ghost, old_c)
 				EntityAddComponent2(giant_stomach_ghost, "StatusEffectDataComponent")
 			end
-			print(known[d[k]], d[k])
 			EntityIngestMaterial(p, d[k], 0.71 * 0.075 / known[d[k]]) -- 100 ~= 7s for LC, we want 0.05s which is +0.3s/s. 100/7s*0.05s=0.71
 		end
 	end
