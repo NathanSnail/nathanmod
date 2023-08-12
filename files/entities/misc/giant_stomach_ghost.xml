@@ -1,0 +1,5 @@
+<Entity>
+	<IngestionComponent></IngestionComponent>
+	<StatusEffectDataComponent></StatusEffectDataComponent>
+	<MaterialInventoryComponent></MaterialInventoryComponent>
+</Entity>
