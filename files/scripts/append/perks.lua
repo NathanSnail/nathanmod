@@ -107,7 +107,23 @@ local new_perks = {
 		stackable_maximum = 5, -- we really should stop before this but it looks really funny when mina is microscopic
 		usable_by_enemies = true,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			
+
+		end,
+		func_remove = function(entity_who_picked)
+
+		end,
+	},
+	{ --TODO: Sprite
+		id = "NATHANMOD_GIANT_STOMACH",
+		ui_name = "$perk_nathanmod_giant_stomach",
+		ui_description = "$perkdesc_nathanmod_giant_stomach",
+		ui_icon = "data/ui_gfx/perk_icons/gold_is_forever.png",
+		perk_icon = "data/items_gfx/perks/gold_is_forever.png",
+		stackable = true, -- no max stacks :hamis: (3 is 10x status)
+		func = function(entity_perk_item, entity_who_picked, item_name)
+			EntityAddComponent2(entity_who_picked, "LuaComponent",
+				{ execute_every_n_frame = 10, script_source_file = "mods/nathanmod/files/scripts/perks/giant_stomach.lua" }
+			)
 		end,
 		func_remove = function(entity_who_picked)
 
