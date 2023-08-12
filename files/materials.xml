@@ -1,0 +1,25 @@
+<Materials>
+	<comment val="XML vscode extension doesn't know what a comment is so i use these ig"></comment>
+	<CellDataChild
+		_parent="water"
+		_inherit_reactions="0"
+		tags="[liquid],[corrodible],[soluble],[impure],[liquid_common]"
+		name="nathanmod_boostium"
+		ui_name="$mat_poison"
+		cold_freezes_to_material="magic_liquid_faster_levitation"
+		warmth_melts_to_material="magic_liquid_faster_levitation"
+		show_in_creative_mode="1" >
+		<StatusEffects>
+			<Stains>
+				<StatusEffect type="NATHANMOD_BOOSTIUM" />
+			</Stains>
+			<Ingestion>
+				<StatusEffect type="NATHANMOD_BOOSTIUM" amount="0.12" />
+			</Ingestion>
+		</StatusEffects>
+	    <Graphics
+			color="4420B0FF" >
+    	</Graphics>
+	</CellDataChild>
+	<comment val="Regens lev bar"></comment>
+</Materials>
