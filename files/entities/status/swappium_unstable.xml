@@ -1,0 +1,16 @@
+<Entity>
+	<GameEffectComponent 
+		effect="CUSTOM"
+		custom_effect_id="NATHANMOD_SWAPPIUM_UNSTABLE"
+		frames="1200" >
+	</GameEffectComponent>
+
+	<InheritTransformComponent 
+		_enabled="1" >
+    </InheritTransformComponent>
+	
+	<LuaComponent
+		script_source_file="mods/nathanmod/files/scripts/status/swappium_unstable.lua"
+		execute_every_n_frame="15" >
+	</LuaComponent>	
+</Entity>

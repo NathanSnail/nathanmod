@@ -1,14 +1,50 @@
 <Materials>
 	<comment val="XML vscode extension doesn't know what a comment is so i use these ig"></comment>
-	<CellDataChild
-		_parent="water"
-		_inherit_reactions="0"
-		tags="[liquid],[corrodible],[soluble],[impure],[liquid_common]"
-		name="nathanmod_boostium"
-		ui_name="$mat_poison"
-		cold_freezes_to_material="magic_liquid_faster_levitation"
-		warmth_melts_to_material="magic_liquid_faster_levitation"
+	<CellData
+		name="nathanmod_magic_base"
+		ui_name="$nathanmod_mat_magic_base"
+  		tags="[liquid],[magic_liquid],[impure]"
+		burnable="0"
+		density="5"
+		cell_type="liquid"
+		wang_color="a2b94fbe"
+		generates_smoke="0"
+		liquid_gravity="0.8"
+		liquid_sand="0"
+		gfx_glow="150"
+		on_fire="0"
+		requires_oxygen="0"
+		liquid_stains="1"
+		liquid_sprite_stain_shaken_drop_chance="1"
+		audio_materialaudio_type="MAGICAL" 
 		show_in_creative_mode="1" >
+		<ParticleEffect
+			vel.y="-40"
+			vel_random.min_y="-20.21"
+			vel_random.max_y="-2.861"
+			vel_random.min_x="-6.667"
+			vel_random.max_x="6.667"
+			lifetime.min="0.3238"
+			lifetime.max="9.3238"
+			gravity.y="-100"
+			render_on_grid="1"
+			airflow_force="10"
+			airflow_scale="6.857"
+			draw_as_long="0"
+			friction="1.352"
+			probability="0.0343" >
+		</ParticleEffect>
+	</CellData>
+	<comment val="base magic liquid, technically can spawn maybe sometimes but idc"></comment>
+
+	<CellDataChild
+		_parent="nathanmod_magic_base"
+		wang_color="97bc37"
+		name="nathanmod_boostium"
+		ui_name="$nathanmod_mat_boostium"
+		density="0.2"
+		cold_freezes_to_material="magic_liquid_faster_levitation"
+		warmth_melts_to_material="magic_liquid_movement_faster" >
 		<StatusEffects>
 			<Stains>
 				<StatusEffect type="NATHANMOD_BOOSTIUM" />
@@ -22,4 +58,44 @@
     	</Graphics>
 	</CellDataChild>
 	<comment val="Regens lev bar"></comment>
+
+	<CellDataChild
+	_parent="nathanmod_magic_base"
+	wang_color="2665668b"
+	name="nathanmod_swappium"
+	ui_name="$nathanmod_mat_swappium"
+	density="6.12" >
+	<StatusEffects>
+		<Stains>
+			<StatusEffect type="NATHANMOD_SWAPPIUM" />
+		</Stains>
+		<Ingestion>
+			<StatusEffect type="NATHANMOD_SWAPPIUM" amount="0.12" />
+		</Ingestion>
+	</StatusEffects>
+	<Graphics
+		color="4400D0FF" >
+	</Graphics>
+	</CellDataChild>
+	<comment val="Swap with nearby enemies"></comment>
+
+	<CellDataChild
+	_parent="nathanmod_magic_base"
+	wang_color="5bb45e72"
+	name="nathanmod_swappium_unstable"
+	ui_name="$nathanmod_mat_swappium_unstable" 
+	density = "6.03" >
+	<StatusEffects>
+		<Stains>
+			<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" />
+		</Stains>
+		<Ingestion>
+			<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" amount="0.12" />
+		</Ingestion>
+	</StatusEffects>
+	<Graphics
+		color="4400E0E0" >
+	</Graphics>
+	</CellDataChild>
+	<comment val="Swap nearby enemies with each other"></comment>
 </Materials>
