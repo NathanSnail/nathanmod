@@ -39,7 +39,6 @@
 
 	<CellDataChild
 		_parent="nathanmod_magic_base"
-		wang_color="97bc37"
 		name="nathanmod_boostium"
 		ui_name="$nathanmod_mat_boostium"
 		density="0.2"
@@ -61,7 +60,6 @@
 
 	<CellDataChild
 	_parent="nathanmod_magic_base"
-	wang_color="2665668b"
 	name="nathanmod_swappium"
 	ui_name="$nathanmod_mat_swappium"
 	density="6.12" >
@@ -81,7 +79,6 @@
 
 	<CellDataChild
 	_parent="nathanmod_magic_base"
-	wang_color="5bb45e72"
 	name="nathanmod_swappium_unstable"
 	ui_name="$nathanmod_mat_swappium_unstable" 
 	density = "6.03" >
@@ -98,4 +95,250 @@
 	</Graphics>
 	</CellDataChild>
 	<comment val="Swap nearby enemies with each other"></comment>
+
+	<CellDataChild
+	_parent="nathanmod_magic_base"
+	name="nathanmod_liquid_lens"
+	ui_name="$nathanmod_mat_liquid_lens" 
+	density = "1.2" >
+	<StatusEffects>
+		<Stains>
+			<StatusEffect type="NIGHTVISION" />
+		</Stains>
+		<Ingestion>
+			<StatusEffect type="NIGHTVISION" amount="2.5" />
+		</Ingestion>
+	</StatusEffects>
+	<Graphics
+		texture_file="mods/nathanmod/files/sprites/materials/test.png"  
+		color="FF00AAFF" >
+	</Graphics>
+	</CellDataChild>
+	<comment val="The funny seeing things clearly puzzle liquid"></comment>
+
+	<CellDataChild
+	_parent="nathanmod_magic_base"
+	name="nathanmod_metallic_platium"
+	ui_name="$nathanmod_mat_metallic_platium" 
+	density = "6.7" >
+	<Graphics
+		color="FFAAAAAF" >
+	</Graphics>
+	</CellDataChild>
+	<comment val="Converts stuff to metal"></comment>
+
+	<CellDataChild
+	_parent="magic_liquid_mana_regeneration"
+	_inherit_reactions="0"
+	name="nathanmod_unstable_mana"
+	ui_name="$nathanmod_mat_unstable_mana" 
+	density = "5.3" >
+	<StatusEffects>
+		<Stains>
+			<!-- TODO: make this thing have cool effects-->
+			<StatusEffect type="MANA_REGENERATION" />
+		</Stains>
+		<Ingestion>
+			<StatusEffect type="MANA_REGENERATION" amount="2.5" />
+		</Ingestion>
+	</StatusEffects>
+	<Graphics
+		color="FF00FFFF" >
+	</Graphics>
+	</CellDataChild>
+	<!--- Conc Mana but more fun -->
+
+
+	<CellData
+		name="nathanmod_foam_starter"
+		ui_name="$nathanmod_mat_foam"
+		tags="[liquid],[impure]"
+		burnable="0"
+		density="4"
+		cell_type="liquid"
+		generates_smoke="0"
+		liquid_gravity="1.8"
+		liquid_sand="0"
+		on_fire="0"
+		requires_oxygen="0"
+		show_in_creative_mode="1" 
+		lifetime="5000" >
+		<Graphics
+			color="FFEEFFFF" >
+		</Graphics>
+	</CellData>
+	<!-- starts a foam reaction -->
+	<CellData
+		name="nathanmod_foam_heavy"
+		ui_name="$nathanmod_mat_foam"
+  		tags="[liquid],[impure]"
+		burnable="0"
+		density="7"
+		cell_type="liquid"
+		generates_smoke="0"
+		liquid_gravity="1.8"
+		liquid_sand="0"
+		on_fire="0"
+		requires_oxygen="0"
+		show_in_creative_mode="1" >
+		<Graphics
+			color="FFEEFFFF" >
+		</Graphics>
+	</CellData>
+
+	<CellData
+		name="nathanmod_foam_gas"
+		ui_name="$nathanmod_mat_foam"
+  		tags="[liquid],[impure],[gas]"
+		burnable="0"
+		density="0"
+		cell_type="gas"
+		generates_smoke="0"
+		liquid_gravity="0"
+		liquid_sand="0"
+		on_fire="0"
+		requires_oxygen="0"
+		show_in_creative_mode="1" >
+		<Graphics
+			color="FFEEFFFF" >
+		</Graphics>
+	</CellData>
+
+	<CellData
+		name="nathanmod_foam_light"
+		ui_name="$nathanmod_mat_foam"
+		tags="[liquid],[impure]"
+		burnable="0"
+		density="0.2"
+		cell_type="liquid"
+		generates_smoke="0"
+		liquid_gravity="0"
+		liquid_sand="0"
+		on_fire="0"
+		requires_oxygen="0"
+		show_in_creative_mode="1" >
+		<Graphics
+			color="FFEEFFFF" >
+		</Graphics>
+	</CellData>
+
+	<Reaction
+		probability="10"
+		input_cell1="nathanmod_liquid_lens"						input_cell2="air"
+		output_cell1="nathanmod_unstable_mana"					output_cell2="nathanmod_metallic_platium"
+	> 
+	</Reaction>
+	<Reaction
+		probability="15"
+		input_cell1="nathanmod_liquid_lens"						input_cell2="magic_gas_worm_blood"
+		output_cell1="magic_gas_worm_blood" 					output_cell2="magic_gas_worm_blood"
+	>
+	</Reaction>
+	<Reaction
+		probability="30"
+		input_cell1="nathanmod_liquid_lens"						input_cell2="magic_gas_worm_blood"
+		output_cell1="blood_worm" 								output_cell2="blood_worm"
+	>
+	</Reaction>
+	<Reaction
+		probability="100"
+		input_cell1="nathanmod_liquid_lens"						input_cell2="blood_worm"
+		output_cell1="nathanmod_liquid_lens" 					output_cell2="nathanmod_liquid_lens"
+	>
+	</Reaction>
+	<Reaction
+		probability="100"
+		input_cell1="nathanmod_metallic_platium"				input_cell2="[solid]"
+		output_cell1="nathanmod_metallic_platium" 				output_cell2="steel_sand"
+		blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="water"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration"
+		blob_radius2="3"
+	>
+	</Reaction>
+
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="[meltable_metal]"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		blob_radius2="3"
+	>
+	</Reaction>
+
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="gold_box2d"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="bloodgold_box2d"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		blob_radius2="3"
+	>
+	</Reaction>
+	
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="[meltable_metal_generic]"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="[meltable_metal]"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_unstable_mana" 					input_cell2="[sand_metal]"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		blob_radius2="3"
+	>
+	</Reaction>
+	<!-- foam, kinda jank atm air blob dont work?-->
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_foam_starter"		 			input_cell2="air"  
+		output_cell1="nathanmod_foam_starter"	 				output_cell2="nathanmod_foam_gas" 
+		blob_radius1="1"										blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_foam_gas"		 				input_cell2="air"  
+		output_cell1="nathanmod_foam_heavy"	 					output_cell2="nathanmod_foam_heavy" 
+		blob_radius1="1"										blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="nathanmod_foam_heavy"		 				input_cell2="air"  
+		output_cell1="nathanmod_foam_light"	 					output_cell2="nathanmod_foam_light" 
+		blob_radius1="1"										blob_radius2="3"
+	>
+	</Reaction>
+
+	<!-- fix vaniller -->
+	<Reaction
+		probability="25" 
+		input_cell1="magic_liquid_mana_regeneration" 			input_cell2="[sand_metal]"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="steam" 
+	>
+	</Reaction>
+	<Reaction
+		probability="25" 
+		input_cell1="magic_liquid_mana_regeneration" 			input_cell2="[meltable_metal]"  
+		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="steam" 
+	>
+	</Reaction>
 </Materials>

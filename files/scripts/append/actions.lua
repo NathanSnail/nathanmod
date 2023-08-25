@@ -1,3 +1,6 @@
+-- dofile("data/scripts/gun/gun_actions.lua")
+-- dofile("data/scripts/gun/gun.lua")
+
 local new_actions = {
 	{
 		id                     = "NATHANMOD_PROJECTILE_GRAVITY",
