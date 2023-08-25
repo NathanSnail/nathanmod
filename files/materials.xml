@@ -59,92 +59,92 @@
 	<comment val="Regens lev bar"></comment>
 
 	<CellDataChild
-	_parent="nathanmod_magic_base"
-	name="nathanmod_swappium"
-	ui_name="$nathanmod_mat_swappium"
-	density="6.12" >
-	<StatusEffects>
-		<Stains>
-			<StatusEffect type="NATHANMOD_SWAPPIUM" />
-		</Stains>
-		<Ingestion>
-			<StatusEffect type="NATHANMOD_SWAPPIUM" amount="0.12" />
-		</Ingestion>
-	</StatusEffects>
-	<Graphics
-		color="4400D0FF" >
-	</Graphics>
+		_parent="nathanmod_magic_base"
+		name="nathanmod_swappium"
+		ui_name="$nathanmod_mat_swappium"
+		density="6.12" >
+		<StatusEffects>
+			<Stains>
+				<StatusEffect type="NATHANMOD_SWAPPIUM" />
+			</Stains>
+			<Ingestion>
+				<StatusEffect type="NATHANMOD_SWAPPIUM" amount="0.12" />
+			</Ingestion>
+		</StatusEffects>
+		<Graphics
+			color="4400D0FF" >
+		</Graphics>
 	</CellDataChild>
 	<comment val="Swap with nearby enemies"></comment>
 
 	<CellDataChild
-	_parent="nathanmod_magic_base"
-	name="nathanmod_swappium_unstable"
-	ui_name="$nathanmod_mat_swappium_unstable" 
-	density = "6.03" >
-	<StatusEffects>
-		<Stains>
-			<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" />
-		</Stains>
-		<Ingestion>
-			<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" amount="0.12" />
-		</Ingestion>
-	</StatusEffects>
-	<Graphics
-		color="4400E0E0" >
-	</Graphics>
+		_parent="nathanmod_magic_base"
+		name="nathanmod_swappium_unstable"
+		ui_name="$nathanmod_mat_swappium_unstable" 
+		density = "6.03" >
+		<StatusEffects>
+			<Stains>
+				<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" />
+			</Stains>
+			<Ingestion>
+				<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" amount="0.12" />
+			</Ingestion>
+		</StatusEffects>
+		<Graphics
+			color="4400E0E0" >
+		</Graphics>
 	</CellDataChild>
 	<comment val="Swap nearby enemies with each other"></comment>
 
 	<CellDataChild
-	_parent="nathanmod_magic_base"
-	name="nathanmod_liquid_lens"
-	ui_name="$nathanmod_mat_liquid_lens" 
-	density = "1.2" >
-	<StatusEffects>
-		<Stains>
-			<StatusEffect type="NIGHTVISION" />
-		</Stains>
-		<Ingestion>
-			<StatusEffect type="NIGHTVISION" amount="2.5" />
-		</Ingestion>
-	</StatusEffects>
-	<Graphics
-		texture_file="mods/nathanmod/files/sprites/materials/test.png"  
-		color="FF00AAFF" >
-	</Graphics>
+		_parent="nathanmod_magic_base"
+		name="nathanmod_liquid_lens"
+		ui_name="$nathanmod_mat_liquid_lens" 
+		density = "1.2" >
+		<StatusEffects>
+			<Stains>
+				<StatusEffect type="NIGHTVISION" />
+			</Stains>
+			<Ingestion>
+				<StatusEffect type="NIGHTVISION" amount="2.5" />
+			</Ingestion>
+		</StatusEffects>
+		<Graphics
+			texture_file="mods/nathanmod/files/sprites/materials/test.png"  
+			color="FF00AAFF" >
+		</Graphics>
 	</CellDataChild>
 	<comment val="The funny seeing things clearly puzzle liquid"></comment>
 
 	<CellDataChild
-	_parent="nathanmod_magic_base"
-	name="nathanmod_metallic_platium"
-	ui_name="$nathanmod_mat_metallic_platium" 
-	density = "6.7" >
-	<Graphics
-		color="FFAAAAAF" >
-	</Graphics>
+		_parent="nathanmod_magic_base"
+		name="nathanmod_metallic_platium"
+		ui_name="$nathanmod_mat_metallic_platium" 
+		density = "6.7" >
+		<Graphics
+			color="FFAAAAAF" >
+		</Graphics>
 	</CellDataChild>
 	<comment val="Converts stuff to metal"></comment>
 
 	<CellDataChild
-	_parent="magic_liquid_mana_regeneration"
-	_inherit_reactions="0"
-	name="nathanmod_unstable_mana"
-	ui_name="$nathanmod_mat_unstable_mana" 
-	density = "5.3" >
-	<StatusEffects>
-		<Stains>
-			<!-- TODO: make this thing have cool effects-->
-			<StatusEffect type="MANA_REGENERATION" />
-		</Stains>
-		<Ingestion>
-			<StatusEffect type="MANA_REGENERATION" amount="2.5" />
-		</Ingestion>
-	</StatusEffects>
-	<Graphics
-		color="FF00FFFF" >
-	</Graphics>
+		_parent="magic_liquid_mana_regeneration"
+		_inherit_reactions="0"
+		name="nathanmod_unstable_mana"
+		ui_name="$nathanmod_mat_unstable_mana" 
+		density = "5.3" >
+		<StatusEffects>
+			<Stains>
+				<!-- TODO: make this thing have cool effects-->
+				<StatusEffect type="MANA_REGENERATION" />
+			</Stains>
+			<Ingestion>
+				<StatusEffect type="MANA_REGENERATION" amount="2.5" />
+			</Ingestion>
+		</StatusEffects>
+		<Graphics
+			color="FF00FFFF" >
+		</Graphics>
 	</CellDataChild>
 	<!--- Conc Mana but more fun -->
 
