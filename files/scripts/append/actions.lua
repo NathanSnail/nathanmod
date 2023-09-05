@@ -16,7 +16,7 @@ local new_actions = {
 		action                 = function()
 			c.fire_rate_wait = c.fire_rate_wait + 3
 			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/projectile_gravity.xml,"
-			draw_actions(1,true)
+			draw_actions(1, true)
 		end
 	},
 	{
@@ -29,13 +29,40 @@ local new_actions = {
 		spawn_level            = "0,1,2,3,4,5,6", -- BOMB
 		spawn_probability      = "1,1,1,1,0.5,0.5,0.1", -- BOMB
 		price                  = 140,
-		mana                   = -25, -- still worse than add mana
+		mana                   = -25,             -- still worse than add mana
 		action                 = function()
 			c.fire_rate_wait = c.fire_rate_wait - 5
 			current_reload_time = current_reload_time - 7
 			c.bounces = c.bounces + 1
 			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/bounce_evil.xml,"
-			draw_actions(1,true)
+			draw_actions(1, true)
+		end
+	},
+	{
+		id                     = "NATHANMOD_BULLET", -- danger to society
+		name                   = "$nathanmod_action_bullet",
+		description            = "$nathanmod_actiondesc_bullet",
+		sprite                 = "mods/nathanmod/files/sprites/spells/bounce_evil.png",
+		related_extra_entities = { "mods/nathanmod/files/entities/modifier/bounce_evil.xml" },
+		type                   = ACTION_TYPE_PROJECTILE,
+		spawn_level            = "0,1,2,3,4,5,6", -- BOMB
+		spawn_probability      = "1,1,1,1,0.5,0.5,0.1", -- BOMB
+		price                  = 140,
+		mana                   = 30,
+		max_uses               = 8,
+		never_unlimited        = true,
+		action                 = function()
+			add_projectile("data/entities/projectiles/machinegun_bullet_slower.xml")
+			if (#hand == 0) or reflecting then return end
+			if #deck == 0 then
+				deck[1] = hand[#hand] -- i have not seen a worse programming language
+			else
+				table.insert(deck, 1, hand[#hand])
+			end
+			table.remove(hand, #hand)
+			if deck[1].uses_remaining ~= nil then
+				deck[1].uses_remaining = deck[1].uses_remaining - 1
+			end
 		end
 	}
 }
