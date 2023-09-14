@@ -1,0 +1,7 @@
+<Entity>
+	<LuaComponent
+		script_source_file="mods/nathanmod/files/scripts/spells/horizontal_homing.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+</Entity>
