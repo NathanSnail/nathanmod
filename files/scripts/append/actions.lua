@@ -415,6 +415,43 @@ local new_actions = {
 			add_projectile("mods/nathanmod/files/entities/projectile/digging_detonation.xml")
 		end
 	},
+	{
+		id                = "NATHANMOD_ADD_TRIGGER",
+		name              = "$nathanmod_action_add_trigger",
+		description       = "$nathanmod_actiondesc_add_trigger",
+		sprite            = "mods/nathanmod/files/sprites/spells/bounce_evil.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 45,
+		action            = function()
+			old_proj_spawn = add_projectile
+			old_trigger_spawn = add_projectile_trigger_hit_world
+			old_timer_spawn = add_projectile_trigger_timer
+			old_death_spawn = add_projectile_trigger_death
+			function do_trigger(file)
+				add_projectile = old_proj_spawn
+				add_projectile_trigger_hit_world = old_trigger_spawn
+				add_projectile_trigger_timer = old_timer_spawn
+				add_projectile_trigger_death = old_death_spawn
+				BeginProjectile(file)
+				BeginTriggerHitWorld()
+				draw_shot(create_shot(1), true)
+				EndTrigger()
+				EndProjectile()
+			end
+			add_projectile = do_trigger
+			add_projectile_trigger_hit_world = do_trigger
+			add_projectile_trigger_timer = do_trigger
+			add_projectile_trigger_death = do_trigger
+			draw_actions(1, true)
+			add_projectile = old_proj_spawn
+			add_projectile_trigger_hit_world = old_trigger_spawn
+			add_projectile_trigger_timer = old_timer_spawn
+			add_projectile_trigger_death = old_death_spawn
+		end
+	},
 }
 
 for k, v in ipairs(new_actions) do
