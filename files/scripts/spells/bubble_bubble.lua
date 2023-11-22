@@ -8,7 +8,7 @@ local groups = {}
 local rad = 32
 local rad_sq = rad ^ 2
 local alpha = 0.9
-local smooth_factor = 0.4 -- maybe change this later
+local smooth_factor = 0.995 -- maybe change this later
 -- algo overview:
 -- we have the pool which is all bubbles in a group
 -- 1 we get a bubble which is our target
