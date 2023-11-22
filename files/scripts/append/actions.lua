@@ -598,6 +598,7 @@ local new_actions = {
 		price             = 50,
 		mana              = 20,
 		action            = function()
+			if reflecting then return end
 			draw_shot(create_shot(1), true)
 		end
 	},
@@ -683,6 +684,22 @@ local new_actions = {
 			c.speed_multiplier = math.max(math.min(c.speed_multiplier + 1.5, 20), 0) -- slightly silly
 			c.lifetime_add = c.lifetime_add - 86 -- 60 + 25 - 86 => -1
 		end
+	},
+	{
+		id          = "NATHANMOD_BUBBLE_BUBBLE",
+		name 		= "$nathanmod_action_bubble_bubble",
+		description = "$nathanmod_actiondesc_bubble_bubble",
+		sprite 		= "data/ui_gfx/gun_actions/bubbleshot.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/bubbleshot_unidentified.png",
+		related_projectiles	= {"mods/nathanmod/files/entities/projectile/bubble_bubble.xml"},
+		type 		= ACTION_TYPE_PROJECTILE,
+		spawn_level                       = "0,1,2,3", -- BUBBLESHOT
+		spawn_probability                 = "1,0.6,1,0.5", -- BUBBLESHOT
+		price = 100,
+		mana = 5,
+		action 		= function()
+			add_projectile("mods/nathanmod/files/entities/projectile/bubble_bubble.xml")
+		end,
 	},
 }
 
