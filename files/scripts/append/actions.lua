@@ -693,12 +693,15 @@ local new_actions = {
 		sprite_unidentified = "data/ui_gfx/gun_actions/bubbleshot_unidentified.png",
 		related_projectiles	= {"mods/nathanmod/files/entities/projectile/bubble_bubble.xml"},
 		type 		= ACTION_TYPE_PROJECTILE,
-		spawn_level                       = "0,1,2,3", -- BUBBLESHOT
+		spawn_level                       = "2,3,4,5", -- bubble bubble
 		spawn_probability                 = "1,0.6,1,0.5", -- BUBBLESHOT
 		price = 100,
-		mana = 5,
+		mana = 25,
 		action 		= function()
 			add_projectile("mods/nathanmod/files/entities/projectile/bubble_bubble.xml")
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10
+			c.fire_rate_wait = c.fire_rate_wait - 16
+			current_reload_time = current_reload_time + 8
 		end,
 	},
 }
