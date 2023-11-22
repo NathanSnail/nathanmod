@@ -40,15 +40,29 @@ local function multiply_handler(base, recursion_level, iteration)
 		table.insert(hand, mv)
 		table.remove(deck, 1)
 	end
+	local old_draw = dont_draw_actions
 	for i = 1, tot_mul - 1 do
 		dont_draw_actions = true
 		target.action(recursion_level, iteration)
 	end
-	dont_draw_actions = false
+	dont_draw_actions = old_draw
 	current_reload_time = old_recharge
 	c.fire_rate_wait = old_cast
 	target.action(recursion_level, iteration)
 end
+
+local function copy(v)
+	if type(v) == "table" then
+		local new = {}
+		for k, v in pairs(v) do
+			new[k] = copy(v)
+		end
+		return new
+	end
+	return v
+end
+
+nathanmod_copyed_cast_state = {}
 
 local new_actions = {
 	{
@@ -426,11 +440,11 @@ local new_actions = {
 		price             = 50,
 		mana              = 45,
 		action            = function()
-			old_proj_spawn = add_projectile
-			old_trigger_spawn = add_projectile_trigger_hit_world
-			old_timer_spawn = add_projectile_trigger_timer
-			old_death_spawn = add_projectile_trigger_death
-			function do_trigger(file)
+			local old_proj_spawn = add_projectile
+			local old_trigger_spawn = add_projectile_trigger_hit_world
+			local old_timer_spawn = add_projectile_trigger_timer
+			local old_death_spawn = add_projectile_trigger_death
+			local function do_trigger(file)
 				add_projectile = old_proj_spawn
 				add_projectile_trigger_hit_world = old_trigger_spawn
 				add_projectile_trigger_timer = old_timer_spawn
@@ -450,6 +464,224 @@ local new_actions = {
 			add_projectile_trigger_hit_world = old_trigger_spawn
 			add_projectile_trigger_timer = old_timer_spawn
 			add_projectile_trigger_death = old_death_spawn
+		end
+	},
+	{
+		id                = "NATHANMOD_SPARK_TRIGGER_TIMER",
+		name              = "$nathanmod_action_spark_trigger_timer",
+		description       = "$nathanmod_actiondesc_spark_trigger_timer",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 45,
+		action            = function()
+			if reflecting then
+				Reflection_RegisterProjectile("data/entities/projectiles/deck/light_bullet.xml")
+				return
+			end
+			BeginProjectile("data/entities/projectiles/deck/light_bullet.xml")
+			BeginTriggerHitWorld()
+			draw_shot(create_shot(1), true)
+			EndTrigger()
+			BeginTriggerTimer(10)
+			draw_shot(create_shot(1), true)
+			EndTrigger()
+			EndProjectile()
+		end
+	},
+	{
+		id                = "NATHANMOD_SPARK_TRIGGER_DOUBLE",
+		name              = "$nathanmod_action_spark_trigger_double",
+		description       = "$nathanmod_actiondesc_spark_trigger_double",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 45,
+		action            = function()
+			if reflecting then
+				Reflection_RegisterProjectile("data/entities/projectiles/deck/light_bullet.xml")
+				return
+			end
+			BeginProjectile("data/entities/projectiles/deck/light_bullet.xml")
+			BeginTriggerHitWorld()
+			draw_shot(create_shot(1), true)
+			EndTrigger()
+			BeginTriggerHitWorld()
+			draw_shot(create_shot(1), true)
+			EndTrigger()
+			EndProjectile()
+		end
+	},
+	{
+		id                = "NATHANMOD_COPY_CAST_STATE",
+		name              = "$nathanmod_action_copy_cast_state",
+		description       = "$nathanmod_actiondesc_spark_trigger_double",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 45,
+		action            = function()
+			if reflecting then
+				return
+			end
+			nathanmod_copyed_cast_state = copy(c)
+		end
+	},
+	{
+		id                = "NATHANMOD_PASTE_CAST_STATE",
+		name              = "$nathanmod_action_paste_cast_state",
+		description       = "$nathanmod_actiondesc_spark_trigger_double",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 45,
+		action            = function()
+			if reflecting then
+				return
+			end
+			for k, v in pairs(nathanmod_copyed_cast_state or {}) do
+				c[k] = v
+			end
+		end
+	},
+	{
+		id                = "NATHANMOD_WRAP_HALF",
+		name              = "$nathanmod_action_wrap_half",
+		description       = "$nathanmod_actiondesc_wrap_half",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 0,
+		action            = function()
+			if reflecting or force_stop_draws then
+				return
+			end
+			move_discarded_to_deck() -- relearn all the wand mechanics
+		end
+	},
+	{
+		id                = "NATHANMOD_INFERNO_SHOT",
+		name              = "$nathanmod_action_inferno_shot",
+		description       = "$nathanmod_actiondesc_inferno_shot",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_MODIFIER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 15,
+		action            = function()
+			c.damage_fire_add = c.damage_fire_add + 0.3
+			c.fire_rate_wait = c.fire_rate_wait + 6
+			current_reload_time = current_reload_time - 6
+			c.lifetime_add = c.lifetime_add - 13
+			draw_actions(1, true)
+		end
+	},
+	{
+		id                = "NATHANMOD_AIR_TRIGGER",
+		name              = "$nathanmod_action_air_trigger",
+		description       = "$nathanmod_actiondesc_air_trigger",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_DRAW_MANY,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 20,
+		action            = function()
+			draw_shot(create_shot(1), true)
+		end
+	},
+	{
+		id                = "NATHANMOD_FORMATION_NONE",
+		name              = "$nathanmod_action_formation_none",
+		description       = "$nathanmod_actiondesc_formation_none",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_MODIFIER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 0,
+		action            = function()
+			c.pattern_degrees = 0
+			draw_actions(1, true)
+		end
+	},
+	{
+		id                = "NATHANMOD_NO_HARM",
+		name              = "$nathanmod_action_no_harm",
+		description       = "$nathanmod_actiondesc_no_harm",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_MODIFIER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 5,
+		action            = function()
+			local old_dmgs = {
+				c.damage_melee_add,
+				c.damage_projectile_add,
+				c.damage_electricity_add,
+				c.damage_fire_add,
+				c.damage_explosion_add,
+				c.damage_ice_add,
+				c.damage_slice_add,
+				c.damage_healing_add,
+				c.damage_curse_add,
+				c.damage_drill_add,
+			}
+			draw_actions(1, true)
+			c.damage_melee_add = old_dmgs[1]
+			c.damage_projectile_add = old_dmgs[2]
+			c.damage_electricity_add = old_dmgs[3]
+			c.damage_fire_add = old_dmgs[4]
+			c.damage_explosion_add = old_dmgs[5]
+			c.damage_ice_add = old_dmgs[6]
+			c.damage_slice_add = old_dmgs[7]
+			c.damage_healing_add = old_dmgs[8]
+			c.damage_curse_add = old_dmgs[9]
+			c.damage_drill_add = old_dmgs[10]
+		end
+	},
+	{
+		id                = "NATHANMOD_DO_NOTHING",
+		name              = "$nathanmod_action_do_nothing",
+		description       = "$nathanmod_actiondesc_do_nothing",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_DRAW_MANY,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 0,
+		action            = function()
+			draw_actions(1, true)
+		end
+	},
+	{
+		id                = "NATHANMOD_BLINK_SHOT",
+		name              = "$nathanmod_action_blink_shot",
+		description       = "$nathanmod_actiondesc_blink_shot",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_MODIFIER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 50,
+		mana              = 20,
+		action            = function()
+			c.damage_slice_add = c.damage_slice_add + 0.8
+			c.fire_rate_wait = c.fire_rate_wait + 8
+			current_reload_time = current_reload_time + 12
+			c.speed_multiplier = math.max(math.min(c.speed_multiplier + 1.5, 20), 0) -- slightly silly
+			c.lifetime_add = c.lifetime_add - 86 -- 60 + 25 - 86 => -1
 		end
 	},
 }
