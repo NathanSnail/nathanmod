@@ -704,6 +704,30 @@ local new_actions = {
 			current_reload_time = current_reload_time + 8
 		end,
 	},
+	{
+		id                = "NATHANMOD_DRAW_DISPLACER",
+		name              = "$nathanmod_action_draw_displacer",
+		description       = "$nathanmod_actiondesc_draw_displacer",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_DRAW_MANY,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 0,
+		action            = function()
+			local data = deck[1]
+			if data ~= nil then
+				table.insert(discarded, data)
+				table.remove(deck, 1)
+			end
+			draw_actions(1, true)
+			local data = discarded[#discarded]
+			if data ~= nil then
+				table.insert(deck, data)
+				table.remove(discarded, #discarded)
+			end
+		end
+	},
 }
 
 for k, v in ipairs(new_actions) do
