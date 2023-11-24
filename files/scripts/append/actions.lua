@@ -682,22 +682,22 @@ local new_actions = {
 			c.fire_rate_wait = c.fire_rate_wait + 8
 			current_reload_time = current_reload_time + 12
 			c.speed_multiplier = math.max(math.min(c.speed_multiplier + 1.5, 20), 0) -- slightly silly
-			c.lifetime_add = c.lifetime_add - 86 -- 60 + 25 - 86 => -1
+			c.lifetime_add = c.lifetime_add - 86                            -- 60 + 25 - 86 => -1
 		end
 	},
 	{
-		id          = "NATHANMOD_BUBBLE_BUBBLE",
-		name 		= "$nathanmod_action_bubble_bubble",
-		description = "$nathanmod_actiondesc_bubble_bubble",
-		sprite 		= "data/ui_gfx/gun_actions/bubbleshot.png",
+		id                  = "NATHANMOD_BUBBLE_BUBBLE",
+		name                = "$nathanmod_action_bubble_bubble",
+		description         = "$nathanmod_actiondesc_bubble_bubble",
+		sprite              = "data/ui_gfx/gun_actions/bubbleshot.png",
 		sprite_unidentified = "data/ui_gfx/gun_actions/bubbleshot_unidentified.png",
-		related_projectiles	= {"mods/nathanmod/files/entities/projectile/bubble_bubble.xml"},
-		type 		= ACTION_TYPE_PROJECTILE,
-		spawn_level                       = "2,3,4,5", -- bubble bubble
-		spawn_probability                 = "1,0.6,1,0.5", -- BUBBLESHOT
-		price = 100,
-		mana = 25,
-		action 		= function()
+		related_projectiles = { "mods/nathanmod/files/entities/projectile/bubble_bubble.xml" },
+		type                = ACTION_TYPE_PROJECTILE,
+		spawn_level         = "2,3,4,5",             -- bubble bubble
+		spawn_probability   = "1,0.6,1,0.5",         -- BUBBLESHOT
+		price               = 100,
+		mana                = 25,
+		action              = function()
 			add_projectile("mods/nathanmod/files/entities/projectile/bubble_bubble.xml")
 			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 10
 			c.fire_rate_wait = c.fire_rate_wait - 16
@@ -723,7 +723,7 @@ local new_actions = {
 			draw_actions(1, true)
 			local data = discarded[#discarded]
 			if data ~= nil then
-				table.insert(deck, data)
+				table.insert(deck, 1, data)
 				table.remove(discarded, #discarded)
 			end
 		end
