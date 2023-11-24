@@ -693,8 +693,8 @@ local new_actions = {
 		sprite_unidentified = "data/ui_gfx/gun_actions/bubbleshot_unidentified.png",
 		related_projectiles = { "mods/nathanmod/files/entities/projectile/bubble_bubble.xml" },
 		type                = ACTION_TYPE_PROJECTILE,
-		spawn_level         = "2,3,4,5",             -- bubble bubble
-		spawn_probability   = "1,0.6,1,0.5",         -- BUBBLESHOT
+		spawn_level         = "2,3,4,5", -- bubble bubble
+		spawn_probability   = "1,0.6,1,0.5", -- BUBBLESHOT
 		price               = 100,
 		mana                = 25,
 		action              = function()
@@ -725,6 +725,31 @@ local new_actions = {
 			if data ~= nil then
 				table.insert(deck, 1, data)
 				table.remove(discarded, #discarded)
+			end
+		end
+	},
+	{
+		id                = "NATHANMOD_HAND_SHIFTER",
+		name              = "$nathanmod_action_hand_shifter",
+		description       = "$nathanmod_actiondesc_hand_shifter",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 15,
+		action            = function()
+			if #hand >= 2 then
+				local data = hand[#hand - 1]
+				table.insert(discarded, data)
+				table.remove(hand, #hand - 1)
+			end
+			for i = 1, 2 do
+				if #discarded >= 1 then
+					local data = discarded[1]
+					table.insert(hand, data)
+					table.remove(discarded, 1)
+				end
 			end
 		end
 	},
