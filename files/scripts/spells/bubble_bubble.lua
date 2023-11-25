@@ -1,4 +1,3 @@
-dofile_once("mods/nathanmod/files/scripts/lib/print.lua")
 bubble_manager = bubble_manager or GetUpdatedEntityID()
 -- if the manager exists and its not us don't try manage
 if GetUpdatedEntityID() ~= bubble_manager and EntityGetIsAlive(bubble_manager) then return end
