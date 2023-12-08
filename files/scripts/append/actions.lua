@@ -753,6 +753,75 @@ local new_actions = {
 			end
 		end
 	},
+	{
+		id                = "NATHANMOD_FULL_SALVO",
+		name              = "$nathanmod_action_full_salvo",
+		description       = "$nathanmod_actiondesc_full_salvo",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_DRAW_MANY,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 15,
+		action            = function()
+			local count = 2 * (#deck + #hand + #discarded)
+			for i = 1, count do
+				draw_shot(create_shot(1), true)
+			end
+		end
+	},
+	{
+		id                = "NATHANMOD_PI",
+		name              = "$nathanmod_action_pi",
+		description       = "$nathanmod_actiondesc_pi",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 15,
+		action            = function()
+			local data = deck[1]
+			if data == nil then return end
+			data.action()
+			table.insert(discarded, data)
+			table.remove(deck, 1)
+		end
+	},
+	{
+		id                = "NATHANMOD_ACI",
+		name              = "$nathanmod_action_aci",
+		description       = "$nathanmod_actiondesc_aci",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 15,
+		action            = function()
+			playing_permanent_card = not playing_permanent_card
+			draw_action(true) -- cool one which doesn't do the
+			playing_permanent_card = not playing_permanent_card
+		end
+	},
+	{
+		id                = "NATHANMOD_ACIV",
+		name              = "$nathanmod_action_aciv",
+		description       = "$nathanmod_actiondesc_aciv",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 15,
+		action            = function()
+			for i = 1, 4 do
+				playing_permanent_card = not playing_permanent_card
+				draw_action(true) -- cool one which doesn't do the
+				playing_permanent_card = not playing_permanent_card
+			end
+		end
+	},
 }
 
 for k, v in ipairs(new_actions) do
