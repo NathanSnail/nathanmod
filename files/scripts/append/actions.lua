@@ -815,11 +815,25 @@ local new_actions = {
 		price             = 10,
 		mana              = 15,
 		action            = function()
+			playing_permanent_card = not playing_permanent_card
 			for i = 1, 4 do
-				playing_permanent_card = not playing_permanent_card
 				draw_action(true) -- cool one which doesn't do the
-				playing_permanent_card = not playing_permanent_card
 			end
+			playing_permanent_card = not playing_permanent_card
+		end
+	},
+	{
+		id                = "NATHANMOD_DBG",
+		name              = "$nathanmod_action_dbg",
+		description       = "$nathanmod_actiondesc_dbg",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = -100,
+		mana              = 0,
+		action            = function()
+			print(tostring(#hand))
 		end
 	},
 }
