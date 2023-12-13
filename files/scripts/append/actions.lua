@@ -766,8 +766,13 @@ local new_actions = {
 		action            = function()
 			local count = 2 * (#deck + #hand + #discarded)
 			for i = 1, count do
+				BeginProjectile("mods/nathanmod/files/entities/projectile/empty.xml")
+				BeginTriggerDeath() -- so called "nolla" when the gun system works:
 				draw_shot(create_shot(1), true)
+				EndTrigger()
+				EndProjectile()
 			end
+
 		end
 	},
 	{
@@ -822,19 +827,68 @@ local new_actions = {
 			playing_permanent_card = not playing_permanent_card
 		end
 	},
+	-- {
+	-- 	id                = "NATHANMOD_DBG",
+	-- 	name              = "$nathanmod_action_dbg",
+	-- 	description       = "$nathanmod_actiondesc_dbg",
+	-- 	sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+	-- 	type              = ACTION_TYPE_OTHER,
+	-- 	spawn_level       = "1,2,3,4",
+	-- 	spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+	-- 	price             = -100,
+	-- 	mana              = 0,
+	-- 	action            = function()
+	-- 		print(tostring(#hand))
+	-- 	end
+	-- },
+	-- {
+	-- 	id                = "NATHANMOD_SLEEP",
+	-- 	name              = "$nathanmod_action_sleep",
+	-- 	description       = "$nathanmod_actiondesc_sleep",
+	-- 	sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+	-- 	type              = ACTION_TYPE_OTHER,
+	-- 	spawn_level       = "1,2,3,4",
+	-- 	spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+	-- 	price             = -100,
+	-- 	mana              = 0,
+	-- 	action            = function()
+	-- 		cur_time = GameGetRealWorldTimeSinceStarted()
+	-- 		while GameGetRealWorldTimeSinceStarted() - 10 < cur_time do
+	-- 			c.pattern_degrees = 0x12345678
+	-- 		end
+	-- 	end
+	-- },
 	{
-		id                = "NATHANMOD_DBG",
-		name              = "$nathanmod_action_dbg",
-		description       = "$nathanmod_actiondesc_dbg",
+		id                = "NATHANMOD_FORMATION_ABSURD",
+		name              = "$nathanmod_action_formation_absurd",
+		description       = "$nathanmod_actiondesc_formation_absurd",
 		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
-		type              = ACTION_TYPE_OTHER,
+		type              = ACTION_TYPE_DRAW_MANY,
 		spawn_level       = "1,2,3,4",
 		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
-		price             = -100,
+		price             = 50,
 		mana              = 0,
 		action            = function()
-			print(tostring(#hand))
+			c.pattern_degrees = 178
+			draw_actions(2, true)
 		end
+	},
+	{ -- vanilla removed spell
+		id          = "TELEPATHY_FIELD",
+		name 		= "$action_telepathy_field",
+		description = "$actiondesc_telepathy_field",
+		sprite 		= "data/ui_gfx/gun_actions/telepathy_field.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/telepathy_field_unidentified.png",
+		type 		= ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level                       = "", -- TELEPATHY_FIELD
+		spawn_probability                 = "", -- TELEPATHY_FIELD
+		price = 150,
+		mana = 60,
+		max_uses = 10,
+		action 		= function()
+			add_projectile("data/entities/projectiles/deck/telepathy_field.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 15
+		end,
 	},
 }
 
