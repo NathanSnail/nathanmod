@@ -5,10 +5,7 @@ ModLuaFileAppend("data/scripts/buildings/workshop_trigger_check_stats.lua","mods
 ModMaterialsFileAdd("mods/nathanmod/files/materials.xml") -- materials & reactions
 
 local new_content = ModTextFileGetContent("mods/nathanmod/files/translations.csv")
-local content = ModTextFileGetContent("data/translations/common.csv")
-content = content:gsub("\r","")
-content = content:gsub("\n\n","\n")
-new_content = new_content:gsub("\r","")
-new_content = new_content:gsub("\n\n","\n")
-ModTextFileSetContent("data/translations/common.csv", content .. new_content) -- translations
+local content = ModTextFileGetContent("data/translations/common.csv") .. "\n" .. new_content
+content = content:gsub("\r",""):gsub("\n\n","\n")
+ModTextFileSetContent("data/translations/common.csv", content) -- translations
 
