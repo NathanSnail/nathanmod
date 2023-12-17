@@ -73,6 +73,8 @@
 		</ProjectileComponent>
 	</Base>
 
+	<!-- consider damagemodel -->
+
 	<VariableStorageComponent
 		name="projectile_file"
 		value_string="mods/nathanmod/files/entities/projectile/circle_casting.xml"

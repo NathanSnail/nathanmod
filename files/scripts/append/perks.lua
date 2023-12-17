@@ -1,3 +1,5 @@
+-- dofile("data/scripts/perks/perk.lua")
+
 local new_perks = {
 	{ --TODO: Sprite
 		id = "NATHANMOD_MINI_MINA",
@@ -107,11 +109,18 @@ local new_perks = {
 		stackable = true,
 		func = function(entity_perk_item, entity_who_picked, item_name)
 			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{ execute_every_n_frame = 10, script_source_file = "mods/nathanmod/files/scripts/perks/giant_stomach.lua" }
+				{
+					execute_every_n_frame = 10,
+					script_source_file = "mods/nathanmod/files/scripts/perks/giant_stomach.lua",
+					_tags = "perk_component"
+				}
 			)
 		end,
 		func_remove = function(entity_who_picked)
-
+			local c = EntityGetComponent(entity_who_picked, "LuaComponent", "perk_component")
+			for k, v in ipairs(c or {}) do
+				EntityRemoveComponent(entity_who_picked, v)
+			end
 		end,
 	},
 }
