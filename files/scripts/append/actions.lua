@@ -62,7 +62,7 @@ local function copy(v)
 	return v
 end
 
-nathanmod_copyed_cast_state = {}
+nathanmod_copyed_shot_state = {}
 
 local new_actions = {
 	{
@@ -517,9 +517,9 @@ local new_actions = {
 		end
 	},
 	{
-		id                = "NATHANMOD_COPY_CAST_STATE",
-		name              = "$nathanmod_action_copy_cast_state",
-		description       = "$nathanmod_actiondesc_spark_trigger_double",
+		id                = "NATHANMOD_COPY_SHOT_STATE",
+		name              = "$nathanmod_action_copy_shot_state",
+		description       = "$nathanmod_actiondesc_copy_shot_state",
 		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
 		type              = ACTION_TYPE_OTHER,
 		spawn_level       = "1,2,3,4",
@@ -530,13 +530,13 @@ local new_actions = {
 			if reflecting then
 				return
 			end
-			nathanmod_copyed_cast_state = copy(c)
+			nathanmod_copyed_shot_state = copy(c)
 		end
 	},
 	{
 		id                = "NATHANMOD_PASTE_CAST_STATE",
-		name              = "$nathanmod_action_paste_cast_state",
-		description       = "$nathanmod_actiondesc_spark_trigger_double",
+		name              = "$nathanmod_action_paste_shot_state",
+		description       = "$nathanmod_actiondesc_paste_shot_state",
 		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
 		type              = ACTION_TYPE_OTHER,
 		spawn_level       = "1,2,3,4",
@@ -547,7 +547,7 @@ local new_actions = {
 			if reflecting then
 				return
 			end
-			for k, v in pairs(nathanmod_copyed_cast_state or {}) do
+			for k, v in pairs(nathanmod_copyed_shot_state or {}) do
 				c[k] = v
 			end
 		end
@@ -599,7 +599,11 @@ local new_actions = {
 		mana              = 20,
 		action            = function()
 			if reflecting then return end
+			BeginProjectile("mods/nathanmod/files/entities/projectile/empty.xml")
+			BeginTriggerDeath() -- so called "nolla" when the gun system works:
 			draw_shot(create_shot(1), true)
+			EndTrigger()
+			EndProjectile()
 		end
 	},
 	{
@@ -658,13 +662,27 @@ local new_actions = {
 		name              = "$nathanmod_action_do_nothing",
 		description       = "$nathanmod_actiondesc_do_nothing",
 		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
-		type              = ACTION_TYPE_DRAW_MANY,
+		type              = ACTION_TYPE_OTHER,
 		spawn_level       = "1,2,3,4",
 		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
 		price             = 10,
 		mana              = 0,
 		action            = function()
 			draw_actions(1, true)
+		end
+	},
+	{
+		id                = "NATHANMOD_BLANK",
+		name              = "$nathanmod_action_blank",
+		description       = "$nathanmod_actiondesc_blank",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_OTHER,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 10,
+		mana              = 0,
+		action            = function()
+			add_projectile("mods/nathanmod/files/entities/projectile/empty.xml")
 		end
 	},
 	{
@@ -873,23 +891,24 @@ local new_actions = {
 			draw_actions(2, true)
 		end
 	},
-	{ -- vanilla removed spell
-		id          = "TELEPATHY_FIELD",
-		name 		= "$action_telepathy_field",
-		description = "$actiondesc_telepathy_field",
-		sprite 		= "data/ui_gfx/gun_actions/telepathy_field.png",
-		sprite_unidentified = "data/ui_gfx/gun_actions/telepathy_field_unidentified.png",
-		type 		= ACTION_TYPE_STATIC_PROJECTILE,
-		spawn_level                       = "", -- TELEPATHY_FIELD
-		spawn_probability                 = "", -- TELEPATHY_FIELD
-		price = 150,
-		mana = 60,
-		max_uses = 10,
-		action 		= function()
-			add_projectile("data/entities/projectiles/deck/telepathy_field.xml")
-			c.fire_rate_wait = c.fire_rate_wait + 15
-		end,
-	},
+	-- { -- vanilla removed spell,
+	-- if i make the eye glow in the dark this could be good.
+	-- 	id          = "TELEPATHY_FIELD",
+	-- 	name 		= "$action_telepathy_field",
+	-- 	description = "$actiondesc_telepathy_field",
+	-- 	sprite 		= "data/ui_gfx/gun_actions/telepathy_field.png",
+	-- 	sprite_unidentified = "data/ui_gfx/gun_actions/telepathy_field_unidentified.png",
+	-- 	type 		= ACTION_TYPE_STATIC_PROJECTILE,
+	-- 	spawn_level                       = "", -- TELEPATHY_FIELD
+	-- 	spawn_probability                 = "", -- TELEPATHY_FIELD
+	-- 	price = 150,
+	-- 	mana = 60,
+	-- 	max_uses = 10,
+	-- 	action 		= function()
+	-- 		add_projectile("data/entities/projectiles/deck/telepathy_field.xml")
+	-- 		c.fire_rate_wait = c.fire_rate_wait + 15
+	-- 	end,
+	-- },
 }
 
 for k, v in ipairs(new_actions) do
