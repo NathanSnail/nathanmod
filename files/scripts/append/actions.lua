@@ -290,6 +290,8 @@ local new_actions = {
 		action            = function()
 			c.trail_material = c.trail_material .. "alcohol,"
 			c.trail_material_amount = c.trail_material_amount + 5
+			c.spread_degrees = c.spread_degrees + 15
+			c.game_effect_entities = c.game_effect_entities .. "mods/nathanmod/files/entities/misc/alcohol.xml"
 			draw_actions(1, true)
 		end
 	},
