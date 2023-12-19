@@ -594,7 +594,7 @@ local new_actions = {
 		name              = "$nathanmod_action_air_trigger",
 		description       = "$nathanmod_actiondesc_air_trigger",
 		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
-		type              = ACTION_TYPE_DRAW_MANY,
+		type              = ACTION_TYPE_OTHER,
 		spawn_level       = "1,2,3,4",
 		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
 		price             = 50,
@@ -696,9 +696,9 @@ local new_actions = {
 		spawn_level       = "1,2,3,4",
 		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
 		price             = 50,
-		mana              = 20,
+		mana              = 45,
 		action            = function()
-			c.damage_slice_add = c.damage_slice_add + 0.8
+			c.damage_slice_add = c.damage_slice_add + 0.7
 			c.fire_rate_wait = c.fire_rate_wait + 8
 			current_reload_time = current_reload_time + 12
 			c.speed_multiplier = math.max(math.min(c.speed_multiplier + 1.5, 20), 0) -- slightly silly
@@ -805,10 +805,13 @@ local new_actions = {
 		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
 		price             = 10,
 		mana              = 15,
-		action            = function()
+		recursive = true,
+		action            = function(recursion_level)
 			local data = deck[1]
 			if data == nil then return end
-			data.action()
+			local rec = check_recursion( data, recursion_level )
+			if rec <= -1 then return end
+			data.action(rec)
 			table.insert(discarded, data)
 			table.remove(deck, 1)
 		end
@@ -911,6 +914,7 @@ local new_actions = {
 	-- 		c.fire_rate_wait = c.fire_rate_wait + 15
 	-- 	end,
 	-- },
+	-- TODO: instant wrap at cur pos
 }
 
 for k, v in ipairs(new_actions) do
