@@ -922,15 +922,15 @@ local new_actions = {
 		sprite_unidentified = "data/ui_gfx/gun_actions/spread_reduce_unidentified.png",
 		spawn_requires_flag = "card_unlocked_maths",
 		type                = ACTION_TYPE_OTHER,
-		spawn_level         = "10",         -- MANA_REDUCE
-		spawn_probability   = "1",          -- MANA_REDUCE
+		spawn_level         = "10", -- MANA_REDUCE
+		spawn_probability   = "1", -- MANA_REDUCE
 		price               = 100,
 		mana                = 0,
 		action              = function(recursion_level, iteration)
 			if reflecting then return end
 			local endpoint = -1
 			local elsepoint = -1
-			local doskip = tonumber( SessionNumbersGetValue("NEW_GAME_PLUS_COUNT") ) ~= 0
+			local doskip = tonumber(SessionNumbersGetValue("NEW_GAME_PLUS_COUNT")) ~= 0
 
 			if (#deck > 0) then
 				for i, v in ipairs(deck) do
@@ -994,6 +994,24 @@ local new_actions = {
 
 			draw_actions(1, true)
 		end
+	},
+	{
+		id                  = "NATHANMOD_GIFT_BOX",
+		name                = "$nathanmod_action_gift_box",
+		description         = "$nathanmod_actiondesc_gift_box",
+		sprite              = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		spawn_requires_flag = "card_unlocked_maths",
+		type                = ACTION_TYPE_UTILITY,
+		spawn_level         = "1,2,3,4",
+		spawn_probability   = "0.8,0.8,0.8,0.8", -- digging detonation
+		price               = 100,
+		mana                = 0,
+		action              = function()
+			for k, v in ipairs(discarded) do
+				table.insert(deck, k, v)
+				discarded[k] = nil -- no anarchy allowed
+			end
+		end,
 	}
 }
 
