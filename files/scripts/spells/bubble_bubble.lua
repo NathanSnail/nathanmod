@@ -6,8 +6,8 @@ local bubble_pool = EntityGetWithTag("bubble_bubble")
 local groups = {}
 local rad = 32
 local rad_sq = rad ^ 2
-local alpha = 0.9
-local smooth_factor = 0.8 -- maybe change this later
+local alpha = 0.8
+local smooth_factor = 0.75 -- maybe change this later
 -- algo overview:
 -- we have the pool which is all bubbles in a group
 -- 1 we get a bubble which is our target
