@@ -1007,6 +1007,7 @@ local new_actions = {
 		price               = 100,
 		mana                = 0,
 		action              = function()
+			if force_stop_draws then return end
 			for k, v in ipairs(discarded) do
 				table.insert(deck, k, v)
 				discarded[k] = nil -- no anarchy allowed
