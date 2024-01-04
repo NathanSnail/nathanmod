@@ -996,24 +996,40 @@ local new_actions = {
 		end
 	},
 	{
-		id                  = "NATHANMOD_GIFT_BOX",
-		name                = "$nathanmod_action_gift_box",
-		description         = "$nathanmod_actiondesc_gift_box",
-		sprite              = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
-		spawn_requires_flag = "card_unlocked_maths",
-		type                = ACTION_TYPE_UTILITY,
-		spawn_level         = "1,2,3,4",
-		spawn_probability   = "0.8,0.8,0.8,0.8", -- digging detonation
-		price               = 100,
-		mana                = 0,
-		action              = function()
+		id                = "NATHANMOD_GIFT_BOX",
+		name              = "$nathanmod_action_gift_box",
+		description       = "$nathanmod_actiondesc_gift_box",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 100,
+		mana              = 0,
+		action            = function()
 			if force_stop_draws then return end
 			for k, v in ipairs(discarded) do
 				table.insert(deck, k, v)
 				discarded[k] = nil -- no anarchy allowed
 			end
 		end,
-	}
+	},
+	{
+		id                = "NATHANMOD_64K",
+		name              = "$nathanmod_action_64k",
+		description       = "$nathanmod_actiondesc_64k",
+		sprite            = "data/ui_gfx/gun_actions/light_bullet_trigger_timer.png",
+		type              = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4",
+		spawn_probability = "0.8,0.8,0.8,0.8", -- digging detonation
+		price             = 100,
+		mana              = 0,
+		action            = function()
+			local data = hand[#hand]
+			if data == nil then return end
+			table.insert(discarded, data)
+			hand[#hand] = nil
+		end,
+	},
 }
 
 for k, v in ipairs(new_actions) do
