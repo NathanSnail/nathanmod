@@ -37,13 +37,13 @@ local function multiply_handler(base, recursion_level, iteration)
 	if target == nil then
 		return
 	end
-	for i = 1, off do
+	for _ = 1, off do
 		local mv = deck[1]
 		table.insert(hand, mv)
 		table.remove(deck, 1)
 	end
 	local old_draw = dont_draw_actions
-	for i = 1, tot_mul - 1 do
+	for _ = 1, tot_mul - 1 do
 		dont_draw_actions = true
 		target.action(recursion_level, iteration)
 	end
@@ -53,19 +53,20 @@ local function multiply_handler(base, recursion_level, iteration)
 	target.action(recursion_level, iteration)
 end
 
-local function copy(v)
-	if type(v) == "table" then
+local function copy(object)
+	if type(object) == "table" then
 		local new = {}
-		for k, v in pairs(v) do
+		for k, v in pairs(object) do
 			new[k] = copy(v)
 		end
 		return new
 	end
-	return v
+	return object
 end
 
-nathanmod_copyed_shot_state = {}
+NathanmodCopyedShotState = {}
 
+---@type action[]
 local new_actions = {
 	{
 		id = "NATHANMOD_PROJECTILE_GRAVITY",
@@ -544,7 +545,7 @@ local new_actions = {
 			if reflecting then
 				return
 			end
-			nathanmod_copyed_shot_state = copy(c)
+			NathanmodCopyedShotState = copy(c)
 		end,
 	},
 	{
@@ -561,7 +562,7 @@ local new_actions = {
 			if reflecting then
 				return
 			end
-			for k, v in pairs(nathanmod_copyed_shot_state or {}) do
+			for k, v in pairs(NathanmodCopyedShotState or {}) do
 				c[k] = v
 			end
 		end,
@@ -755,7 +756,7 @@ local new_actions = {
 				table.remove(deck, 1)
 			end
 			draw_actions(1, true)
-			local data = discarded[#discarded]
+			data = discarded[#discarded]
 			if data ~= nil then
 				table.insert(deck, 1, data)
 				table.remove(discarded, #discarded)
@@ -778,7 +779,7 @@ local new_actions = {
 				table.insert(discarded, data)
 				table.remove(hand, #hand - 1)
 			end
-			for i = 1, 2 do
+			for _ = 1, 2 do
 				if #discarded >= 1 then
 					local data = discarded[1]
 					table.insert(hand, data)
@@ -799,7 +800,7 @@ local new_actions = {
 		mana = 15,
 		action = function()
 			local count = 2 * (#deck + #hand + #discarded)
-			for i = 1, count do
+			for _ = 1, count do
 				BeginProjectile("mods/nathanmod/files/entities/projectile/empty.xml")
 				BeginTriggerDeath() -- so called "nolla" when the gun system works:
 				draw_shot(create_shot(1), true)
@@ -861,7 +862,7 @@ local new_actions = {
 		mana = 15,
 		action = function()
 			playing_permanent_card = not playing_permanent_card
-			for i = 1, 4 do
+			for _ = 1, 4 do
 				draw_action(true) -- cool one which doesn't do the
 			end
 			playing_permanent_card = not playing_permanent_card
@@ -944,7 +945,7 @@ local new_actions = {
 		spawn_probability = "1", -- MANA_REDUCE
 		price = 100,
 		mana = 0,
-		action = function(recursion_level, iteration)
+		action = function(_, _)
 			if reflecting then
 				return
 			end
@@ -982,7 +983,7 @@ local new_actions = {
 						envelope_max = endpoint
 					end
 
-					for i = envelope_min, envelope_max do
+					for _ = envelope_min, envelope_max do
 						local v = deck[envelope_min]
 
 						if v ~= nil then
@@ -1000,7 +1001,7 @@ local new_actions = {
 							envelope_max = #deck
 						end
 
-						for i = envelope_min, envelope_max do
+						for _ = envelope_min, envelope_max do
 							local v = deck[envelope_min]
 
 							if v ~= nil then
@@ -1056,6 +1057,6 @@ local new_actions = {
 	},
 }
 
-for k, v in ipairs(new_actions) do
+for _, v in ipairs(new_actions) do
 	table.insert(actions, v)
 end
