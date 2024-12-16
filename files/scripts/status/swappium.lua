@@ -1,7 +1,9 @@
 local e = EntityGetRootEntity(GetUpdatedEntityID())
 local x, y = EntityGetTransform(e)
 local r = EntityGetInRadiusWithTag(x, y, 256, "enemy")
-if #r == 0 then return end
+if #r == 0 then
+	return
+end
 local s = r[Random(1, #r)]
 local nx, ny = EntityGetTransform(s)
 EntitySetTransform(e, nx, ny)

@@ -6,7 +6,10 @@ function get_spell(tier)
 		local item = actions[itemno]
 
 		if
-			((item.spawn_requires_flag == nil) or HasFlagPersistent(item.spawn_requires_flag)) and (item.spawn_probability ~= "0") and (item.spawn_level:find(tostring(tier)) ~= nil) then
+			((item.spawn_requires_flag == nil) or HasFlagPersistent(item.spawn_requires_flag))
+			and (item.spawn_probability ~= "0")
+			and (item.spawn_level:find(tostring(tier)) ~= nil)
+		then
 			return item
 		end
 	end
@@ -32,7 +35,7 @@ function do_loot(spell_box, entity_who_picked, name)
 
 	-- PositionSeedComponent
 	local position_comp = EntityGetFirstComponent(spell_box, "PositionSeedComponent")
-	if (position_comp) then
+	if position_comp then
 		rand_x = tonumber(ComponentGetValue(position_comp, "pos_x")) or x
 		rand_y = tonumber(ComponentGetValue(position_comp, "pos_y")) or y
 	end

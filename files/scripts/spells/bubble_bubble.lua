@@ -1,6 +1,8 @@
 bubble_manager = bubble_manager or GetUpdatedEntityID()
 -- if the manager exists and its not us don't try manage
-if GetUpdatedEntityID() ~= bubble_manager and EntityGetIsAlive(bubble_manager) then return end
+if GetUpdatedEntityID() ~= bubble_manager and EntityGetIsAlive(bubble_manager) then
+	return
+end
 bubble_manager = GetUpdatedEntityID()
 local bubble_pool = EntityGetWithTag("bubble_bubble")
 local groups = {}
@@ -59,8 +61,7 @@ for _k, group in ipairs(groups) do
 	table.sort(group) -- performance is already dead, this is needed for smoothing to not look bad, sort by random const >> no sort
 	for k, v in ipairs(group) do
 		local theta = theta_part * k
-		local e_rad = rad / (2 * (1 - math.cos(theta_part))) ^ 0.5 *
-			alpha -- alpha is factor to shrink by, 1 is mathematically perfect but because velocity exists it doesn't work.
+		local e_rad = rad / (2 * (1 - math.cos(theta_part))) ^ 0.5 * alpha -- alpha is factor to shrink by, 1 is mathematically perfect but because velocity exists it doesn't work.
 		if #group == 1 then
 			e_rad = 0 -- hax because 1 size group is technically stable at an infinitely large range, because it always works.
 		end

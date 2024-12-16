@@ -7,7 +7,7 @@ local shooter = ComponentGetValue2(EntityGetComponent(entity_id, "ProjectileComp
 
 local projectiles = EntityGetWithTag("projectile")
 
-if (#projectiles > 0) then
+if #projectiles > 0 then
 	for i, projectile_id in ipairs(projectiles) do
 		local px, py = EntityGetTransform(projectile_id)
 
@@ -18,13 +18,13 @@ if (#projectiles > 0) then
 			distance = math.sqrt((x - px) ^ 2 + (y - py) ^ 2)
 			direction = 0 - math.atan2((y - py), (x - px))
 
-			if (distance < distance_full) then
+			if distance < distance_full then
 				local velocitycomponents = EntityGetComponent(projectile_id, "VelocityComponent")
 
 				local gravity_percent = math.max((distance_full - distance) / distance_full, 0.2)
 				local gravity_coeff = 100
 
-				if (velocitycomponents ~= nil) then
+				if velocitycomponents ~= nil then
 					edit_component(projectile_id, "VelocityComponent", function(comp, vars)
 						local vel_x, vel_y = ComponentGetValueVector2(comp, "mVelocity")
 
@@ -39,7 +39,9 @@ if (#projectiles > 0) then
 					edit_component(projectile_id, "ProjectileComponent", function(comp, vars)
 						local projectile_shooter = ComponentGetValue2(comp, "mWhoShot")
 
-						if shooter == projectile_shooter then return end
+						if shooter == projectile_shooter then
+							return
+						end
 
 						ComponentSetValue2(comp, "friendly_fire", true)
 						ComponentSetValue2(comp, "collide_with_shooter_frames", 0)
