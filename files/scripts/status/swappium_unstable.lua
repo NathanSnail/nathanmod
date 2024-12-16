@@ -1,14 +1,14 @@
-local e = EntityGetRootEntity(GetUpdatedEntityID())
-local x, y = EntityGetTransform(e)
-local r = EntityGetInRadiusWithTag(x, y, 256, "enemy")
-if #r < 2 then return end
-local s1 = r[Random(1, #r)]
-local s2 = r[Random(1, #r)]
-local x, y = EntityGetTransform(s1)
-local nx, ny = EntityGetTransform(s2)
-EntitySetTransform(s1, nx, ny)
-EntitySetTransform(s2, x, y)
-EntityLoad("data/entities/particles/teleportation_source.xml", x, y)
-EntityLoad("data/entities/particles/teleportation_target.xml", nx, ny)
-GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", x, y)
-GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", nx, ny)
+local me = EntityGetRootEntity(GetUpdatedEntityID())
+local x, y = EntityGetTransform(me)
+local enemies = EntityGetInRadiusWithTag(x, y, 256, "enemy")
+if #enemies < 2 then return end
+local target_1 = enemies[Random(1, #enemies)]
+local target_2 = enemies[Random(1, #enemies)]
+local from_x, from_y = EntityGetTransform(target_1)
+local to_x, to_y = EntityGetTransform(target_2)
+EntitySetTransform(target_1, to_x, to_y)
+EntitySetTransform(target_2, from_x, from_y)
+EntityLoad("data/entities/particles/teleportation_source.xml", from_x, from_y)
+EntityLoad("data/entities/particles/teleportation_target.xml", to_x, to_y)
+GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", from_x, from_y)
+GamePlaySound("data/audio/Desktop/misc.bank", "game_effect/teleport/tick", to_x, to_y)

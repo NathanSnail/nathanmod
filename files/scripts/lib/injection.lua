@@ -62,7 +62,7 @@ end
 
 local function prepend(file, target, text)
 	local content = getfile(file)
-	local first, last = content:find(target, 0, true)
+	local first, _ = content:find(target, 0, true)
 	if not first then
 		log({
 			"INJECTION (PREPEND) FAILED: NO HOOK\nFile: ",
