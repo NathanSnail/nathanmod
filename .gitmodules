@@ -1,0 +1,6 @@
+[submodule "files/scripts/submodules/luanxml"]
+	path = files/scripts/submodules/luanxml
+	url = https://github.com/NathanSnail/luanxml.git
+[submodule "files/scripts/submodules/noita_stubs"]
+	path = files/scripts/submodules/noita_stubs
+	url = https://github.com/NathanSnail/noita_stubs.git
