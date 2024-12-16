@@ -1,7 +1,7 @@
 nathanmod_storage = collision_trigger
 function collision_trigger()
 	local entity_id = GetUpdatedEntityID()
-	local x, y      = EntityGetTransform(entity_id)
+	local x, y = EntityGetTransform(entity_id)
 
 	-- Note!
 	--  * For global stats use StatsGetValue("enemies_killed")
@@ -16,12 +16,12 @@ function collision_trigger()
 
 	local reference = EntityGetClosestWithTag(x, y, "workshop_reference")
 
-	local time      = tonumber(StatsBiomeGetValue("playtime"))
+	local time = tonumber(StatsBiomeGetValue("playtime"))
 	print(enemies_killed)
-	if (time <= 60) then
+	if time <= 60 then
 		local tier = 1
 		tier = (time < 5 and 5) or (time < 15 and 4) or (time < 30 and 3) or (time < 45 and 2) or tier
-		if (reference ~= 0) then
+		if reference ~= 0 then
 			x, y = EntityGetTransform(reference)
 		else
 			-- we have save corruption

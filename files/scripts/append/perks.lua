@@ -108,13 +108,11 @@ local new_perks = {
 		stackable_maximum = 3, -- 4 is infinite status effects, can get via dupes but that is your fault if you do that
 		stackable = true,
 		func = function(entity_perk_item, entity_who_picked, item_name)
-			EntityAddComponent2(entity_who_picked, "LuaComponent",
-				{
-					execute_every_n_frame = 10,
-					script_source_file = "mods/nathanmod/files/scripts/perks/giant_stomach.lua",
-					_tags = "perk_component"
-				}
-			)
+			EntityAddComponent2(entity_who_picked, "LuaComponent", {
+				execute_every_n_frame = 10,
+				script_source_file = "mods/nathanmod/files/scripts/perks/giant_stomach.lua",
+				_tags = "perk_component",
+			})
 		end,
 		func_remove = function(entity_who_picked)
 			local c = EntityGetComponent(entity_who_picked, "LuaComponent", "perk_component")

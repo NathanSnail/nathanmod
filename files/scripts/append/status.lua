@@ -5,7 +5,7 @@ table.insert(status_effects, {
 	ui_icon = "", -- TODO: sprite
 	effect_entity = "mods/nathanmod/files/entities/status/boostium.xml",
 	is_harmful = false,
-});
+})
 
 table.insert(status_effects, {
 	id = "NATHANMOD_SWAPPIUM",
@@ -14,7 +14,7 @@ table.insert(status_effects, {
 	ui_icon = "", -- TODO: sprite
 	effect_entity = "mods/nathanmod/files/entities/status/swappium.xml",
 	is_harmful = false,
-});
+})
 
 table.insert(status_effects, {
 	id = "NATHANMOD_SWAPPIUM_UNSTABLE",
@@ -23,4 +23,4 @@ table.insert(status_effects, {
 	ui_icon = "", -- TODO: sprite
 	effect_entity = "mods/nathanmod/files/entities/status/swappium_unstable.xml",
 	is_harmful = false,
-});
+})

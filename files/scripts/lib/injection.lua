@@ -75,24 +75,24 @@ end
 
 --- @enum arg
 args = {
-	FF           = 0,
-	FS           = 1,
-	SF           = 2,
-	SS           = 3,
-	FileFile     = 0,
-	FileString   = 1,
-	StringFile   = 2,
+	FF = 0,
+	FS = 1,
+	SF = 2,
+	SS = 3,
+	FileFile = 0,
+	FileString = 1,
+	StringFile = 2,
 	StringString = 3,
 }
 
 --- @enum mode
 modes = {
-	P       = 0,
-	R       = 1,
-	A       = 2,
+	P = 0,
+	R = 1,
+	A = 2,
 	PREPEND = 0,
 	REPLACE = 1,
-	APPEND  = 2,
+	APPEND = 2,
 }
 
 --- @param args arg (use enum) What type are hook & new, (f)ile or (s)tring, write like (ff) or (sf). hook -> new.
@@ -110,15 +110,15 @@ function inject(args, mode, file, hook, new)
 		new = getfile(new)
 	end
 	if mode == modes.P then
-		prepend(file,hook,new)
+		prepend(file, hook, new)
 		return
 	end
 	if mode == modes.R then
-		replace(file,hook,new)
+		replace(file, hook, new)
 		return
 	end
 	if mode == modes.A then
-		append(file,hook,new)
+		append(file, hook, new)
 		return
 	end
 end
