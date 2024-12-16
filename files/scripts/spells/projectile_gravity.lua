@@ -3,7 +3,8 @@ dofile_once("data/scripts/lib/utilities.lua")
 
 local entity_id = GetUpdatedEntityID()
 local x, y = EntityGetTransform(entity_id)
-local shooter = ComponentGetValue2(EntityGetComponent(entity_id, "ProjectileComponent")[1], "mWhoShot")
+local shooter =
+	ComponentGetValue2(EntityGetComponent(entity_id, "ProjectileComponent")[1], "mWhoShot")
 
 local projectiles = EntityGetWithTag("projectile")
 
@@ -39,9 +40,7 @@ if #projectiles > 0 then
 					edit_component(projectile, "ProjectileComponent", function(comp, _)
 						local projectile_shooter = ComponentGetValue2(comp, "mWhoShot")
 
-						if shooter == projectile_shooter then
-							return
-						end
+						if shooter == projectile_shooter then return end
 
 						ComponentSetValue2(comp, "friendly_fire", true)
 						ComponentSetValue2(comp, "collide_with_shooter_frames", 0)

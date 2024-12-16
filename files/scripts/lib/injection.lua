@@ -20,7 +20,14 @@ local function append(file, target, text)
 	local content = getfile(file)
 	local first, last = content:find(target, 0, true)
 	if not first then
-		log({ "INJECTION (APPEND) FAILED: NO HOOK\nFile: ", file, "\nTarget: ", target, "\nText: ", text })
+		log({
+			"INJECTION (APPEND) FAILED: NO HOOK\nFile: ",
+			file,
+			"\nTarget: ",
+			target,
+			"\nText: ",
+			text,
+		})
 		return
 	end
 	local before = content:sub(1, last)
@@ -28,10 +35,28 @@ local function append(file, target, text)
 	local new = before .. text .. after
 	ModTextFileSetContent(file, new)
 	if ENABLE_LOGGING then
-		log({ "Injected (append) ", text, " in ", file, " at ", target, " causing:\n", new, "\nfrom: \n", content })
+		log({
+			"Injected (append) ",
+			text,
+			" in ",
+			file,
+			" at ",
+			target,
+			" causing:\n",
+			new,
+			"\nfrom: \n",
+			content,
+		})
 	end
 	if content == new then
-		log({ "INJECTION (APPEND) FAILED: NO CHANGE\nFile: ", file, "\nTarget: ", target, "\nText: ", text })
+		log({
+			"INJECTION (APPEND) FAILED: NO CHANGE\nFile: ",
+			file,
+			"\nTarget: ",
+			target,
+			"\nText: ",
+			text,
+		})
 	end
 end
 
@@ -39,7 +64,14 @@ local function prepend(file, target, text)
 	local content = getfile(file)
 	local first, last = content:find(target, 0, true)
 	if not first then
-		log({ "INJECTION (PREPEND) FAILED: NO HOOK\nFile: ", file, "\nTarget: ", target, "\nText: ", text })
+		log({
+			"INJECTION (PREPEND) FAILED: NO HOOK\nFile: ",
+			file,
+			"\nTarget: ",
+			target,
+			"\nText: ",
+			text,
+		})
 		return
 	end
 	local before = content:sub(1, first - 1)
@@ -47,10 +79,28 @@ local function prepend(file, target, text)
 	local new = before .. text .. after
 	ModTextFileSetContent(file, new)
 	if ENABLE_LOGGING then
-		log({ "Injected (prepend) ", text, " in ", file, " at ", target, " causing:\n", new, "\nfrom: \n", content })
+		log({
+			"Injected (prepend) ",
+			text,
+			" in ",
+			file,
+			" at ",
+			target,
+			" causing:\n",
+			new,
+			"\nfrom: \n",
+			content,
+		})
 	end
 	if content == new then
-		log({ "INJECTION (PREPEND) FAILED: NO CHANGE\nFile: ", file, "\nTarget: ", target, "\nText: ", text })
+		log({
+			"INJECTION (PREPEND) FAILED: NO CHANGE\nFile: ",
+			file,
+			"\nTarget: ",
+			target,
+			"\nText: ",
+			text,
+		})
 	end
 end
 
@@ -58,7 +108,14 @@ local function replace(file, target, text)
 	local content = getfile(file)
 	local first, last = content:find(target, 0, true)
 	if not first then
-		log({ "INJECTION (REPLACE) FAILED: NO HOOK\nFile: ", file, "\nTarget: ", target, "\nText: ", text })
+		log({
+			"INJECTION (REPLACE) FAILED: NO HOOK\nFile: ",
+			file,
+			"\nTarget: ",
+			target,
+			"\nText: ",
+			text,
+		})
 		return
 	end
 	local before = content:sub(1, first - 1)
@@ -66,10 +123,28 @@ local function replace(file, target, text)
 	local new = before .. text .. after
 	ModTextFileSetContent(file, new)
 	if ENABLE_LOGGING then
-		log({ "Injected (replace) ", text, " in ", file, " at ", target, " causing:\n", new, "\nfrom: \n", content })
+		log({
+			"Injected (replace) ",
+			text,
+			" in ",
+			file,
+			" at ",
+			target,
+			" causing:\n",
+			new,
+			"\nfrom: \n",
+			content,
+		})
 	end
 	if content == new then
-		log({ "INJECTION (REPLACE) FAILED: NO CHANGE\nFile: ", file, "\nTarget: ", target, "\nText: ", text })
+		log({
+			"INJECTION (REPLACE) FAILED: NO CHANGE\nFile: ",
+			file,
+			"\nTarget: ",
+			target,
+			"\nText: ",
+			text,
+		})
 	end
 end
 
@@ -103,12 +178,8 @@ modes = {
 function inject(args, mode, file, hook, new)
 	local arg1T = args < 2 -- true is file
 	local arg2T = args % 2 == 0
-	if arg1T then
-		hook = getfile(hook)
-	end
-	if arg2T then
-		new = getfile(new)
-	end
+	if arg1T then hook = getfile(hook) end
+	if arg2T then new = getfile(new) end
 	if mode == modes.P then
 		prepend(file, hook, new)
 		return

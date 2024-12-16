@@ -22,7 +22,10 @@ local function generate_spell(x, y, tier)
 end
 
 local function drop_spells(x, y)
-	local num = ComponentGetValue2(EntityGetComponent(GetUpdatedEntityID(), "VariableStorageComponent")[1], "value_int")
+	local num = ComponentGetValue2(
+		EntityGetComponent(GetUpdatedEntityID(), "VariableStorageComponent")[1],
+		"value_int"
+	)
 	for i = 1, num do
 		generate_spell(x + i * 10 - num * 5, y, num)
 	end

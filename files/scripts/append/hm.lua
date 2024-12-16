@@ -19,7 +19,11 @@ function collision_trigger()
 	local time = tonumber(StatsBiomeGetValue("playtime"))
 	if time <= 60 then
 		local tier = 1
-		tier = (time < 5 and 5) or (time < 15 and 4) or (time < 30 and 3) or (time < 45 and 2) or tier
+		tier = (time < 5 and 5)
+			or (time < 15 and 4)
+			or (time < 30 and 3)
+			or (time < 45 and 2)
+			or tier
 		if reference ~= 0 then
 			x, y = EntityGetTransform(reference)
 		else
@@ -29,7 +33,11 @@ function collision_trigger()
 
 		local eid = EntityLoad("mods/nathanmod/files/entities/pickup/speedrun_chest.xml", x, y)
 		change_entity_ingame_name(eid, "$nathanmod_speedrun_chest_" .. tier)
-		ComponentSetValue2(EntityGetComponent(eid, "VariableStorageComponent")[1], "value_int", tier)
+		ComponentSetValue2(
+			EntityGetComponent(eid, "VariableStorageComponent")[1],
+			"value_int",
+			tier
+		)
 	else
 		print("KILLED ALL")
 	end
