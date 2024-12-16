@@ -1,4 +1,8 @@
-local e = EntityGetRootEntity(GetUpdatedEntityID())
-local c = EntityGetComponent(e, "CharacterDataComponent")[1]
-if c == nil then return end
-ComponentSetValue2(c, "mFlyingTimeLeft", ComponentGetValue2(c, "mFlyingTimeLeft") + 0.01)
+local me = EntityGetRootEntity(GetUpdatedEntityID())
+local char_datas = EntityGetComponent(me, "CharacterDataComponent") or {}
+if #char_datas == 0 then return end
+ComponentSetValue2(
+	char_datas[1],
+	"mFlyingTimeLeft",
+	ComponentGetValue2(char_datas, "mFlyingTimeLeft") + 0.01
+)

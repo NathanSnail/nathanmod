@@ -46,9 +46,9 @@ while #bubble_pool ~= 0 do
 	table.insert(groups, group)
 end
 
-for _k, group in ipairs(groups) do
+for _, group in ipairs(groups) do
 	local x, y = 0, 0
-	for __k, elem in ipairs(group) do
+	for _, elem in ipairs(group) do
 		local ex, ey = EntityGetTransform(elem)
 		x = x + ex
 		y = y + ey
@@ -57,18 +57,18 @@ for _k, group in ipairs(groups) do
 	y = y / #group
 	local theta_part = 2 * math.pi / #group
 	table.sort(group) -- performance is already dead, this is needed for smoothing to not look bad, sort by random const >> no sort
-	for k, v in ipairs(group) do
-		local theta = theta_part * k
+	for bubble_index, bubble in ipairs(group) do
+		local theta = theta_part * bubble_index
 		local e_rad = rad / (2 * (1 - math.cos(theta_part))) ^ 0.5 * alpha -- alpha is factor to shrink by, 1 is mathematically perfect but because velocity exists it doesn't work.
 		if #group == 1 then
 			e_rad = 0 -- hax because 1 size group is technically stable at an infinitely large range, because it always works.
 		end
-		local xoff, yoff = e_rad * math.sin(theta), e_rad * math.cos(theta)
-		local ex, ey = x + xoff, y + yoff
-		local ox, oy = EntityGetTransform(v) -- smoother
-		local ex = ex * (1 - smooth_factor) + ox * smooth_factor
-		local ey = ey * (1 - smooth_factor) + oy * smooth_factor
-		EntitySetTransform(v, ex, ey)
-		EntityApplyTransform(v, ex, ey)
+		local x_offset, y_offset = e_rad * math.sin(theta), e_rad * math.cos(theta)
+		local new_x, new_y = x + x_offset, y + y_offset
+		local ox, oy = EntityGetTransform(bubble) -- smoother
+		new_x = new_x * (1 - smooth_factor) + ox * smooth_factor
+		new_y = new_y * (1 - smooth_factor) + oy * smooth_factor
+		EntitySetTransform(bubble, new_x, new_y)
+		EntityApplyTransform(bubble, new_x, new_y)
 	end
 end

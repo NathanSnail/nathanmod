@@ -1,6 +1,6 @@
 local function print_tabbed(tabbing, text)
 	msg = ""
-	for i = 1, tabbing do
+	for _ = 1, tabbing do
 		msg = msg .. "\t"
 	end
 	print(msg .. text)

@@ -1,10 +1,10 @@
-local e = GetUpdatedEntityID()
-local x, y = EntityGetTransform(e)
+local me = GetUpdatedEntityID()
+local x, y = EntityGetTransform(me)
 local target = EntityGetClosestWithTag(x, y, "homing_target")
-local tx, ty = EntityGetTransform(target)
-local vel = EntityGetComponent(e, "VelocityComponent") or {}
-if #vel == 0 then return end
-local vx, vy = ComponentGetValue2(vel[1], "mVelocity")
-local ox = 1 / (math.abs(tx - x) + 5) - 1 / 5
-ox = (((tx - x) > 0) and -1 or 1) * ox * 60
-ComponentSetValue2(vel[1], "mVelocity", vx + ox, vy)
+local target_x = EntityGetTransform(target)
+local vel_comps = EntityGetComponent(me, "VelocityComponent") or {}
+if #vel_comps == 0 then return end
+local vel_x, vel_y = ComponentGetValue2(vel_comps[1], "mVelocity")
+local force_x = 1 / (math.abs(target_x - x) + 5) - 1 / 5
+force_x = (((target_x - x) > 0) and -1 or 1) * force_x * 60
+ComponentSetValue2(vel_comps[1], "mVelocity", vel_x + force_x, vel_y)
