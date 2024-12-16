@@ -1,4 +1,4 @@
-nathanmod_storage = collision_trigger
+local old_collision_trigger = collision_trigger
 function collision_trigger()
 	local entity_id = GetUpdatedEntityID()
 	local x, y = EntityGetTransform(entity_id)
@@ -17,7 +17,6 @@ function collision_trigger()
 	local reference = EntityGetClosestWithTag(x, y, "workshop_reference")
 
 	local time = tonumber(StatsBiomeGetValue("playtime"))
-	print(enemies_killed)
 	if time <= 60 then
 		local tier = 1
 		tier = (time < 5 and 5) or (time < 15 and 4) or (time < 30 and 3) or (time < 45 and 2) or tier
@@ -34,5 +33,5 @@ function collision_trigger()
 	else
 		print("KILLED ALL")
 	end
-	nathanmod_storage()
+	old_collision_trigger()
 end

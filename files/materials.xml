@@ -1,9 +1,8 @@
 <Materials>
-	<comment val="XML vscode extension doesn't know what a comment is so i use these ig"></comment>
 	<CellData
 		name="nathanmod_magic_base"
 		ui_name="$nathanmod_mat_magic_base"
-  		tags="[liquid],[magic_liquid],[impure]"
+		tags="[liquid],[magic_liquid],[impure]"
 		burnable="0"
 		density="5"
 		cell_type="liquid"
@@ -16,8 +15,8 @@
 		requires_oxygen="0"
 		liquid_stains="1"
 		liquid_sprite_stain_shaken_drop_chance="1"
-		audio_materialaudio_type="MAGICAL" 
-		show_in_creative_mode="1" >
+		audio_materialaudio_type="MAGICAL"
+		show_in_creative_mode="1">
 		<ParticleEffect
 			vel.y="-40"
 			vel_random.min_y="-20.21"
@@ -32,10 +31,10 @@
 			airflow_scale="6.857"
 			draw_as_long="0"
 			friction="1.352"
-			probability="0.0343" >
+			probability="0.0343">
 		</ParticleEffect>
 	</CellData>
-	<comment val="base magic liquid, technically can spawn maybe sometimes but idc"></comment>
+	<!-- "base magic liquid, technically can spawn maybe sometimes but idc" -->
 
 	<CellDataChild
 		_parent="nathanmod_magic_base"
@@ -43,7 +42,7 @@
 		ui_name="$nathanmod_mat_boostium"
 		density="0.2"
 		cold_freezes_to_material="magic_liquid_faster_levitation"
-		warmth_melts_to_material="magic_liquid_movement_faster" >
+		warmth_melts_to_material="magic_liquid_movement_faster">
 		<StatusEffects>
 			<Stains>
 				<StatusEffect type="NATHANMOD_BOOSTIUM" />
@@ -52,17 +51,17 @@
 				<StatusEffect type="NATHANMOD_BOOSTIUM" amount="0.12" />
 			</Ingestion>
 		</StatusEffects>
-	    <Graphics
-			color="4420B0FF" >
-    	</Graphics>
+		<Graphics
+			color="4420B0FF">
+		</Graphics>
 	</CellDataChild>
-	<comment val="Regens lev bar"></comment>
+	<!-- "Regens lev bar" -->
 
 	<CellDataChild
 		_parent="nathanmod_magic_base"
 		name="nathanmod_swappium"
 		ui_name="$nathanmod_mat_swappium"
-		density="6.12" >
+		density="6.12">
 		<StatusEffects>
 			<Stains>
 				<StatusEffect type="NATHANMOD_SWAPPIUM" />
@@ -72,16 +71,16 @@
 			</Ingestion>
 		</StatusEffects>
 		<Graphics
-			color="4400D0FF" >
+			color="4400D0FF">
 		</Graphics>
 	</CellDataChild>
-	<comment val="Swap with nearby enemies"></comment>
+	<!-- "Swap with nearby enemies" -->
 
 	<CellDataChild
 		_parent="nathanmod_magic_base"
 		name="nathanmod_swappium_unstable"
-		ui_name="$nathanmod_mat_swappium_unstable" 
-		density = "6.03" >
+		ui_name="$nathanmod_mat_swappium_unstable"
+		density="6.03">
 		<StatusEffects>
 			<Stains>
 				<StatusEffect type="NATHANMOD_SWAPPIUM_UNSTABLE" />
@@ -91,16 +90,16 @@
 			</Ingestion>
 		</StatusEffects>
 		<Graphics
-			color="4400E0E0" >
+			color="4400E0E0">
 		</Graphics>
 	</CellDataChild>
-	<comment val="Swap nearby enemies with each other"></comment>
+	<!-- "Swap nearby enemies with each other" -->
 
 	<CellDataChild
 		_parent="nathanmod_magic_base"
 		name="nathanmod_liquid_lens"
-		ui_name="$nathanmod_mat_liquid_lens" 
-		density = "1.2" >
+		ui_name="$nathanmod_mat_liquid_lens"
+		density="1.2">
 		<StatusEffects>
 			<Stains>
 				<StatusEffect type="NIGHTVISION" />
@@ -110,29 +109,29 @@
 			</Ingestion>
 		</StatusEffects>
 		<Graphics
-			texture_file="mods/nathanmod/files/sprites/materials/test.png"  
-			color="FF00AAFF" >
+			texture_file="mods/nathanmod/files/sprites/materials/test.png"
+			color="FF00AAFF">
 		</Graphics>
 	</CellDataChild>
-	<comment val="The funny seeing things clearly puzzle liquid"></comment>
+	<!-- "The funny seeing things clearly puzzle liquid" -->
 
 	<CellDataChild
 		_parent="nathanmod_magic_base"
 		name="nathanmod_metallic_platium"
-		ui_name="$nathanmod_mat_metallic_platium" 
-		density = "6.7" >
+		ui_name="$nathanmod_mat_metallic_platium"
+		density="6.7">
 		<Graphics
-			color="FFAAAAAF" >
+			color="FFAAAAAF">
 		</Graphics>
 	</CellDataChild>
-	<comment val="Converts stuff to metal"></comment>
+	<!-- "Converts stuff to metal" -->
 
 	<CellDataChild
 		_parent="magic_liquid_mana_regeneration"
 		_inherit_reactions="0"
 		name="nathanmod_unstable_mana"
-		ui_name="$nathanmod_mat_unstable_mana" 
-		density = "5.3" >
+		ui_name="$nathanmod_mat_unstable_mana"
+		density="5.3">
 		<StatusEffects>
 			<Stains>
 				<!-- TODO: make this thing have cool effects-->
@@ -143,10 +142,11 @@
 			</Ingestion>
 		</StatusEffects>
 		<Graphics
-			color="FF00FFFF" >
+			color="FF00FFFF">
 		</Graphics>
 	</CellDataChild>
-	<!--- Conc Mana but more fun -->
+	<!---
+	Conc Mana but more fun -->
 
 
 	<CellData
@@ -161,17 +161,17 @@
 		liquid_sand="0"
 		on_fire="0"
 		requires_oxygen="0"
-		show_in_creative_mode="1" 
-		lifetime="5000" >
+		show_in_creative_mode="1"
+		lifetime="5000">
 		<Graphics
-			color="FFEEFFFF" >
+			color="FFEEFFFF">
 		</Graphics>
 	</CellData>
 	<!-- starts a foam reaction -->
 	<CellData
 		name="nathanmod_foam_heavy"
 		ui_name="$nathanmod_mat_foam"
-  		tags="[liquid],[impure]"
+		tags="[liquid],[impure]"
 		burnable="0"
 		density="7"
 		cell_type="liquid"
@@ -180,16 +180,16 @@
 		liquid_sand="0"
 		on_fire="0"
 		requires_oxygen="0"
-		show_in_creative_mode="1" >
+		show_in_creative_mode="1">
 		<Graphics
-			color="FFEEFFFF" >
+			color="FFEEFFFF">
 		</Graphics>
 	</CellData>
 
 	<CellData
 		name="nathanmod_foam_gas"
 		ui_name="$nathanmod_mat_foam"
-  		tags="[liquid],[impure],[gas]"
+		tags="[liquid],[impure],[gas]"
 		burnable="0"
 		density="0"
 		cell_type="gas"
@@ -198,9 +198,9 @@
 		liquid_sand="0"
 		on_fire="0"
 		requires_oxygen="0"
-		show_in_creative_mode="1" >
+		show_in_creative_mode="1">
 		<Graphics
-			color="FFEEFFFF" >
+			color="FFEEFFFF">
 		</Graphics>
 	</CellData>
 
@@ -216,129 +216,136 @@
 		liquid_sand="0"
 		on_fire="0"
 		requires_oxygen="0"
-		show_in_creative_mode="1" >
+		show_in_creative_mode="1">
 		<Graphics
-			color="FFEEFFFF" >
+			color="FFEEFFFF">
 		</Graphics>
 	</CellData>
 
 	<Reaction
 		probability="10"
-		input_cell1="nathanmod_liquid_lens"						input_cell2="air"
-		output_cell1="nathanmod_unstable_mana"					output_cell2="nathanmod_metallic_platium"
-	> 
+		input_cell1="nathanmod_liquid_lens" input_cell2="air"
+		output_cell1="nathanmod_unstable_mana" output_cell2="nathanmod_metallic_platium"
+	>
 	</Reaction>
 	<Reaction
 		probability="15"
-		input_cell1="nathanmod_liquid_lens"						input_cell2="magic_gas_worm_blood"
-		output_cell1="magic_gas_worm_blood" 					output_cell2="magic_gas_worm_blood"
+		input_cell1="nathanmod_liquid_lens" input_cell2="magic_gas_worm_blood"
+		output_cell1="magic_gas_worm_blood" output_cell2="magic_gas_worm_blood"
 	>
 	</Reaction>
 	<Reaction
 		probability="30"
-		input_cell1="nathanmod_liquid_lens"						input_cell2="magic_gas_worm_blood"
-		output_cell1="blood_worm" 								output_cell2="blood_worm"
+		input_cell1="nathanmod_liquid_lens" input_cell2="magic_gas_worm_blood"
+		output_cell1="blood_worm" output_cell2="blood_worm"
 	>
 	</Reaction>
 	<Reaction
 		probability="100"
-		input_cell1="nathanmod_liquid_lens"						input_cell2="blood_worm"
-		output_cell1="nathanmod_liquid_lens" 					output_cell2="nathanmod_liquid_lens"
+		input_cell1="nathanmod_liquid_lens" input_cell2="blood_worm"
+		output_cell1="nathanmod_liquid_lens" output_cell2="nathanmod_liquid_lens"
 	>
 	</Reaction>
 	<Reaction
 		probability="100"
-		input_cell1="nathanmod_metallic_platium"				input_cell2="[solid]"
-		output_cell1="nathanmod_metallic_platium" 				output_cell2="steel_sand"
+		input_cell1="nathanmod_metallic_platium" input_cell2="[solid]"
+		output_cell1="nathanmod_metallic_platium" output_cell2="steel_sand"
 		blob_radius2="3"
 	>
 	</Reaction>
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="water"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration"
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="water"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
 		blob_radius2="3"
 	>
 	</Reaction>
 
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="[meltable_metal]"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="[meltable_metal]"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
 		blob_radius2="3"
 	>
 	</Reaction>
 
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="gold_box2d"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="gold_box2d"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
 		blob_radius2="3"
 	>
 	</Reaction>
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="bloodgold_box2d"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="bloodgold_box2d"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
 		blob_radius2="3"
 	>
 	</Reaction>
-	
+
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="[meltable_metal_generic]"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
-		blob_radius2="3"
-	>
-	</Reaction>
-	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="[meltable_metal]"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="[meltable_metal_generic]"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
 		blob_radius2="3"
 	>
 	</Reaction>
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_unstable_mana" 					input_cell2="[sand_metal]"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="magic_liquid_mana_regeneration" 
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="[meltable_metal]"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
+		blob_radius2="3"
+	>
+	</Reaction>
+	<Reaction
+		probability="25"
+		input_cell1="nathanmod_unstable_mana" input_cell2="[sand_metal]"
+		output_cell1="magic_liquid_mana_regeneration"
+		output_cell2="magic_liquid_mana_regeneration"
 		blob_radius2="3"
 	>
 	</Reaction>
 	<!-- foam, kinda jank atm air blob dont work?-->
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_foam_starter"		 			input_cell2="air"  
-		output_cell1="nathanmod_foam_starter"	 				output_cell2="nathanmod_foam_gas" 
-		blob_radius1="1"										blob_radius2="3"
+		probability="25"
+		input_cell1="nathanmod_foam_starter" input_cell2="air"
+		output_cell1="nathanmod_foam_starter" output_cell2="nathanmod_foam_gas"
+		blob_radius1="1" blob_radius2="3"
 	>
 	</Reaction>
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_foam_gas"		 				input_cell2="air"  
-		output_cell1="nathanmod_foam_heavy"	 					output_cell2="nathanmod_foam_heavy" 
-		blob_radius1="1"										blob_radius2="3"
+		probability="25"
+		input_cell1="nathanmod_foam_gas" input_cell2="air"
+		output_cell1="nathanmod_foam_heavy" output_cell2="nathanmod_foam_heavy"
+		blob_radius1="1" blob_radius2="3"
 	>
 	</Reaction>
 	<Reaction
-		probability="25" 
-		input_cell1="nathanmod_foam_heavy"		 				input_cell2="air"  
-		output_cell1="nathanmod_foam_light"	 					output_cell2="nathanmod_foam_light" 
-		blob_radius1="1"										blob_radius2="3"
+		probability="25"
+		input_cell1="nathanmod_foam_heavy" input_cell2="air"
+		output_cell1="nathanmod_foam_light" output_cell2="nathanmod_foam_light"
+		blob_radius1="1" blob_radius2="3"
 	>
 	</Reaction>
 
 	<!-- fix vaniller -->
 	<Reaction
-		probability="25" 
-		input_cell1="magic_liquid_mana_regeneration" 			input_cell2="[sand_metal]"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="steam" 
+		probability="25"
+		input_cell1="magic_liquid_mana_regeneration" input_cell2="[sand_metal]"
+		output_cell1="magic_liquid_mana_regeneration" output_cell2="steam"
 	>
 	</Reaction>
 	<Reaction
-		probability="25" 
-		input_cell1="magic_liquid_mana_regeneration" 			input_cell2="[meltable_metal]"  
-		output_cell1="magic_liquid_mana_regeneration" 			output_cell2="steam" 
+		probability="25"
+		input_cell1="magic_liquid_mana_regeneration" input_cell2="[meltable_metal]"
+		output_cell1="magic_liquid_mana_regeneration" output_cell2="steam"
 	>
 	</Reaction>
 </Materials>
