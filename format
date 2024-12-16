@@ -1,2 +1,2 @@
  #!/bin/sh
- ~/.local/share/nvim/mason/packages/stylua/stylua `find . -type f | rg "\.lua$"`
+ ~/.local/share/nvim/mason/packages/stylua/stylua `find . -type f | rg "\.lua$"` | rg -v "/submodules/"
