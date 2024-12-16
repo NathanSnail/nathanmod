@@ -15,8 +15,16 @@ local new_perks = {
 			if sprites ~= nil and #sprites >= 1 then
 				for _, sprite in ipairs(sprites) do
 					-- ComponentSetValue2(v, "has_special_scale", true) breaks turning
-					ComponentSetValue2(sprite, "special_scale_x", ComponentGetValue2(sprite, "special_scale_x") * 0.75)
-					ComponentSetValue2(sprite, "special_scale_y", ComponentGetValue2(sprite, "special_scale_y") * 0.75)
+					ComponentSetValue2(
+						sprite,
+						"special_scale_x",
+						ComponentGetValue2(sprite, "special_scale_x") * 0.75
+					)
+					ComponentSetValue2(
+						sprite,
+						"special_scale_y",
+						ComponentGetValue2(sprite, "special_scale_y") * 0.75
+					)
 				end
 			end
 			local hitboxs = EntityGetComponent(entity_who_picked, "HitboxComponent")
@@ -82,8 +90,16 @@ local new_perks = {
 			if sprites ~= nil and #sprites >= 1 then
 				for _, sprite in ipairs(sprites) do
 					-- ComponentSetValue2(v, "has_special_scale", true) breaks turning
-					ComponentSetValue2(sprite, "special_scale_x", ComponentGetValue2(sprite, "special_scale_x") / 0.75)
-					ComponentSetValue2(sprite, "special_scale_y", ComponentGetValue2(sprite, "special_scale_y") / 0.75)
+					ComponentSetValue2(
+						sprite,
+						"special_scale_x",
+						ComponentGetValue2(sprite, "special_scale_x") / 0.75
+					)
+					ComponentSetValue2(
+						sprite,
+						"special_scale_y",
+						ComponentGetValue2(sprite, "special_scale_y") / 0.75
+					)
 				end
 			end
 			local hitboxs = EntityGetComponent(entity_who_picked, "HitboxComponent")
@@ -161,7 +177,8 @@ local new_perks = {
 			})
 		end,
 		func_remove = function(entity_who_picked)
-			local perk_comps = EntityGetComponent(entity_who_picked, "LuaComponent", "perk_component")
+			local perk_comps =
+				EntityGetComponent(entity_who_picked, "LuaComponent", "perk_component")
 			for _, comp in ipairs(perk_comps or {}) do
 				EntityRemoveComponent(entity_who_picked, comp)
 			end

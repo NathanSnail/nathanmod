@@ -1,8 +1,6 @@
 bubble_manager = bubble_manager or GetUpdatedEntityID()
 -- if the manager exists and its not us don't try manage
-if GetUpdatedEntityID() ~= bubble_manager and EntityGetIsAlive(bubble_manager) then
-	return
-end
+if GetUpdatedEntityID() ~= bubble_manager and EntityGetIsAlive(bubble_manager) then return end
 bubble_manager = GetUpdatedEntityID()
 local bubble_pool = EntityGetWithTag("bubble_bubble")
 local groups = {}

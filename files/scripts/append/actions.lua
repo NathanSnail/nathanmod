@@ -28,15 +28,11 @@ local function multiply_handler(base, recursion_level, iteration)
 			target = data
 			break
 		end
-		if off < map_max[num] then
-			tot_mul = tot_mul * num
-		end
+		if off < map_max[num] then tot_mul = tot_mul * num end
 		off = off + 1
 	end
 	c.pattern_degrees = (tot_mul ^ 0.3) * 4
-	if target == nil then
-		return
-	end
+	if target == nil then return end
 	for _ = 1, off do
 		local mv = deck[1]
 		table.insert(hand, mv)
@@ -81,7 +77,8 @@ local new_actions = {
 		mana = 35,
 		action = function()
 			c.fire_rate_wait = c.fire_rate_wait + 3
-			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/projectile_gravity.xml,"
+			c.extra_entities = c.extra_entities
+				.. "mods/nathanmod/files/entities/modifier/projectile_gravity.xml,"
 			draw_actions(1, true)
 		end,
 	},
@@ -100,7 +97,8 @@ local new_actions = {
 			c.fire_rate_wait = c.fire_rate_wait - 5
 			current_reload_time = current_reload_time - 7
 			c.bounces = c.bounces + 1
-			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/bounce_evil.xml,"
+			c.extra_entities = c.extra_entities
+				.. "mods/nathanmod/files/entities/modifier/bounce_evil.xml,"
 			draw_actions(1, true)
 		end,
 	},
@@ -118,9 +116,7 @@ local new_actions = {
 		never_unlimited = true,
 		action = function()
 			add_projectile("data/entities/projectiles/machinegun_bullet_slower.xml")
-			if (#hand == 0) or reflecting then
-				return
-			end
+			if (#hand == 0) or reflecting then return end
 			if #deck == 0 then
 				deck[1] = hand[#hand] -- i have not seen a worse programming language
 			else
@@ -144,9 +140,7 @@ local new_actions = {
 		mana = 30,
 		recursive = true,
 		action = function(recursion_level, iteration)
-			if iteration ~= nil and iteration ~= 0 then
-				return
-			end
+			if iteration ~= nil and iteration ~= 0 then return end
 			multiply_handler(2, recursion_level, iteration)
 		end,
 	},
@@ -162,9 +156,7 @@ local new_actions = {
 		mana = 40,
 		recursive = true,
 		action = function(recursion_level, iteration)
-			if iteration ~= nil and iteration ~= 0 then
-				return
-			end
+			if iteration ~= nil and iteration ~= 0 then return end
 			multiply_handler(3, recursion_level, iteration)
 		end,
 	},
@@ -180,9 +172,7 @@ local new_actions = {
 		mana = 50,
 		recursive = true,
 		action = function(recursion_level, iteration)
-			if iteration ~= nil and iteration ~= 0 then
-				return
-			end
+			if iteration ~= nil and iteration ~= 0 then return end
 			multiply_handler(4, recursion_level, iteration)
 		end,
 	},
@@ -198,9 +188,7 @@ local new_actions = {
 		mana = 60,
 		recursive = true,
 		action = function(recursion_level, iteration)
-			if iteration ~= nil and iteration ~= 0 then
-				return
-			end
+			if iteration ~= nil and iteration ~= 0 then return end
 			multiply_handler(10, recursion_level, iteration)
 		end,
 	},
@@ -218,7 +206,8 @@ local new_actions = {
 		action = function()
 			c.fire_rate_wait = c.fire_rate_wait + 4
 			c.damage_projectile_add = c.damage_projectile_add + 0.1
-			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/horizontal_homing.xml,"
+			c.extra_entities = c.extra_entities
+				.. "mods/nathanmod/files/entities/modifier/horizontal_homing.xml,"
 			draw_actions(1, true)
 		end,
 	},
@@ -236,7 +225,8 @@ local new_actions = {
 		action = function()
 			c.fire_rate_wait = c.fire_rate_wait + 4
 			c.damage_projectile_add = c.damage_projectile_add + 0.2
-			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/vertical_homing.xml,"
+			c.extra_entities = c.extra_entities
+				.. "mods/nathanmod/files/entities/modifier/vertical_homing.xml,"
 			draw_actions(1, true)
 		end,
 	},
@@ -254,7 +244,10 @@ local new_actions = {
 		max_uses = 30,
 		action = function()
 			c.fire_rate_wait = c.fire_rate_wait + 32
-			add_projectile_trigger_hit_world("mods/nathanmod/files/entities/projectile/circle_casting.xml", 1)
+			add_projectile_trigger_hit_world(
+				"mods/nathanmod/files/entities/projectile/circle_casting.xml",
+				1
+			)
 		end,
 	},
 	{
@@ -269,7 +262,8 @@ local new_actions = {
 		price = 40,
 		mana = 22,
 		action = function()
-			c.extra_entities = c.extra_entities .. "mods/nathanmod/files/entities/modifier/conversion_swapper.xml,"
+			c.extra_entities = c.extra_entities
+				.. "mods/nathanmod/files/entities/modifier/conversion_swapper.xml,"
 			draw_actions(1, true)
 		end,
 	},
@@ -304,7 +298,8 @@ local new_actions = {
 			c.trail_material = c.trail_material .. "alcohol,"
 			c.trail_material_amount = c.trail_material_amount + 5
 			c.spread_degrees = c.spread_degrees + 15
-			c.game_effect_entities = c.game_effect_entities .. "mods/nathanmod/files/entities/misc/alcohol.xml"
+			c.game_effect_entities = c.game_effect_entities
+				.. "mods/nathanmod/files/entities/misc/alcohol.xml"
 			draw_actions(1, true)
 		end,
 	},
@@ -407,7 +402,8 @@ local new_actions = {
 		price = 40,
 		mana = 33,
 		action = function()
-			c.trail_material_amount = c.trail_material_amount + (math.log(c.trail_material_amount + 1, 2) + 1) * 3
+			c.trail_material_amount = c.trail_material_amount
+				+ (math.log(c.trail_material_amount + 1, 2) + 1) * 3
 			draw_actions(1, true)
 		end,
 	},
@@ -542,9 +538,7 @@ local new_actions = {
 		price = 50,
 		mana = 45,
 		action = function()
-			if reflecting then
-				return
-			end
+			if reflecting then return end
 			NathanmodCopyedShotState = copy(c)
 		end,
 	},
@@ -559,9 +553,7 @@ local new_actions = {
 		price = 50,
 		mana = 45,
 		action = function()
-			if reflecting then
-				return
-			end
+			if reflecting then return end
 			for k, v in pairs(NathanmodCopyedShotState or {}) do
 				c[k] = v
 			end
@@ -578,9 +570,7 @@ local new_actions = {
 		price = 50,
 		mana = 0,
 		action = function()
-			if reflecting or force_stop_draws then
-				return
-			end
+			if reflecting or force_stop_draws then return end
 			move_discarded_to_deck() -- relearn all the wand mechanics
 		end,
 	},
@@ -613,9 +603,7 @@ local new_actions = {
 		price = 50,
 		mana = 20,
 		action = function()
-			if reflecting then
-				return
-			end
+			if reflecting then return end
 			BeginProjectile("mods/nathanmod/files/entities/projectile/empty.xml")
 			BeginTriggerDeath() -- so called "nolla" when the gun system works:
 			draw_shot(create_shot(1), true)
@@ -822,13 +810,9 @@ local new_actions = {
 		recursive = true,
 		action = function(recursion_level)
 			local data = deck[1]
-			if data == nil then
-				return
-			end
+			if data == nil then return end
 			local rec = check_recursion(data, recursion_level)
-			if rec <= -1 then
-				return
-			end
+			if rec <= -1 then return end
 			data.action(rec)
 			table.insert(discarded, data)
 			table.remove(deck, 1)
@@ -946,9 +930,7 @@ local new_actions = {
 		price = 100,
 		mana = 0,
 		action = function(_, _)
-			if reflecting then
-				return
-			end
+			if reflecting then return end
 			local endpoint = -1
 			local elsepoint = -1
 			local doskip = tonumber(SessionNumbersGetValue("NEW_GAME_PLUS_COUNT")) ~= 0
@@ -956,7 +938,11 @@ local new_actions = {
 			if #deck > 0 then
 				for i, v in ipairs(deck) do
 					if v ~= nil then
-						if (string.sub(v.id, 1, 3) == "IF_") and (v.id ~= "IF_END") and (v.id ~= "IF_ELSE") then
+						if
+							(string.sub(v.id, 1, 3) == "IF_")
+							and (v.id ~= "IF_END")
+							and (v.id ~= "IF_ELSE")
+						then
 							endpoint = -1
 							break
 						end
@@ -1027,9 +1013,7 @@ local new_actions = {
 		price = 100,
 		mana = 0,
 		action = function()
-			if force_stop_draws then
-				return
-			end
+			if force_stop_draws then return end
 			for k, v in ipairs(discarded) do
 				table.insert(deck, k, v)
 				discarded[k] = nil -- no anarchy allowed
@@ -1048,9 +1032,7 @@ local new_actions = {
 		mana = 0,
 		action = function()
 			local data = hand[#hand]
-			if data == nil then
-				return
-			end
+			if data == nil then return end
 			table.insert(discarded, data)
 			hand[#hand] = nil
 		end,

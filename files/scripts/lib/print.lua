@@ -22,7 +22,10 @@ function print_any(object, iter, prefix)
 		if prefix == "" then
 			print_tabbed(iter, type(object):sub(1, 2):upper() .. "(" .. tostring(object) .. ")")
 		else
-			print_tabbed(iter, table.concat({ prefix, ": ", type(object):sub(1, 3), "(", tostring(object), ")" }))
+			print_tabbed(
+				iter,
+				table.concat({ prefix, ": ", type(object):sub(1, 3), "(", tostring(object), ")" })
+			)
 		end
 	end
 end

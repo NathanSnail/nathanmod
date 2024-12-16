@@ -1,5 +1,6 @@
 -- its not possible to use nxml to parse the ingestion effects, because we dont know what mod adds them
-giant_stomach_ghost = giant_stomach_ghost or EntityLoad("mods/nathanmod/files/entities/misc/giant_stomach_ghost.xml")
+giant_stomach_ghost = giant_stomach_ghost
+	or EntityLoad("mods/nathanmod/files/entities/misc/giant_stomach_ghost.xml")
 known = known or {}
 
 local player = GetUpdatedEntityID()
@@ -17,10 +18,13 @@ for _, status_data_comp in ipairs(status_data_comps) do
 	for effect_index, ingestion_effect in ipairs(ingestion_effects) do
 		if ingestion_effect > 0.1 and ingestion_effect_causes[effect_index] ~= 0 then
 			if known[ingestion_effect_causes[effect_index]] == nil then
-				local old_c = EntityGetComponent(giant_stomach_ghost, "StatusEffectDataComponent")[1]
+				local old_c =
+					EntityGetComponent(giant_stomach_ghost, "StatusEffectDataComponent")[1]
 				local old = ComponentGetValue2(old_c, "ingestion_effects")
 				EntityIngestMaterial(giant_stomach_ghost, ingestion_effect_causes[effect_index], 1)
-				for ghost_effect_index, ghost_effect in ipairs(ComponentGetValue2(old_c, "ingestion_effects")) do
+				for ghost_effect_index, ghost_effect in
+					ipairs(ComponentGetValue2(old_c, "ingestion_effects"))
+				do
 					if ghost_effect - old[ghost_effect_index] > 0.00001 then -- i am untrusting that nolla will not switch this up on me
 						known[ingestion_effect_causes[ghost_effect_index]] = ghost_effect
 					end
