@@ -1032,7 +1032,7 @@ local new_actions = {
 		mana = 0,
 		action = function()
 			local data = hand[#hand]
-			if data == nil then return end
+			if data == nil or data.id ~= "NATHANMOD_64K" then return end
 			table.insert(discarded, data)
 			hand[#hand] = nil
 		end,
